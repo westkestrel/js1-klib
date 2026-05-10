@@ -1,0 +1,10 @@
+{
+  "name": "js1-klib",
+  "description": "JavaScript library for 'Web-1.0' (i.e., delivered by server, not constructed by JavaScript in the browser) web pages.",
+  "type": "module",
+  "version": "0.1.0",
+  "license": "MIT",
+  "scripts": {
+    "build": "node src/build.js"
+  }
+}
