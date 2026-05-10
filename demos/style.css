@@ -1,0 +1,19 @@
+body {
+    font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Constantia, Georgia, serif !important;
+    max-width: 7in;
+    margin: auto;
+    padding: 1em;
+}
+code {
+    color: brown;
+}
+h2,p {
+    margin-bottom: 0;
+}
+td {
+    padding-bottom: 1em;
+}
+li {
+    list-style-type: none;
+    margin-bottom: 0.5em;
+}

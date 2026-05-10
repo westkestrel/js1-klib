@@ -59,13 +59,6 @@ const wireUpCollapsibles = () => {
         }
     }
     cssRules = `
-        .collapsible-section.collapsed > :first-child {
-            color: gray;
-        }
-        .collapsible-section:not(.collapsed) > :first-child:hover,
-        .collapsible-section.collapsed > :first-child:not(:hover) {
-            text-decoration: line-through;
-        }
         .collapsible-section.collapsed > :not(:first-child) {
             display: none;
         }
