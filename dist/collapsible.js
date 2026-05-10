@@ -34,7 +34,7 @@
  *
  * e.g.,
  * ```html
- * <section>
+ * <section class="collapsible-section">
  * <h2><button>Rutabagas</button></h2>
  * <p>Rutabagas are a vegetable.</p>
  * <p>Some people like them. Some people don't</p>
@@ -82,13 +82,6 @@ const wireUpCollapsibles = () => {
         }
     }
     cssRules = `
-        .collapsible-section.collapsed > :first-child {
-            color: gray;
-        }
-        .collapsible-section:not(.collapsed) > :first-child:hover,
-        .collapsible-section.collapsed > :first-child:not(:hover) {
-            text-decoration: line-through;
-        }
         .collapsible-section.collapsed > :not(:first-child) {
             display: none;
         }
