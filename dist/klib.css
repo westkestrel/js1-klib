@@ -73,8 +73,10 @@
     display: inline-block;
     width: 1em;
     height: 1em;
+    line-height: 1em;
     text-align: center;
     content: "►";
+    margin-right: 0.25em;
     transform: rotate(90deg);
     transition: transform 0.5s ease;
 }

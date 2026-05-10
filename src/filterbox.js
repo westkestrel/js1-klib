@@ -61,6 +61,7 @@ const digitsToWords = (text) => {
         .replace('7', 'seven-')
         .replace('8', 'eight-')
         .replace('9', 'nine-')
+        .replace(/\W+/g, '-')
 }
 
 const setVisibility = (filterType, filterClassName, flag) => {
@@ -73,6 +74,7 @@ const setVisibility = (filterType, filterClassName, flag) => {
     for (container of filterContainers) {
         for (filterValue of filterClassName.split(' ')) {
             filterValue = digitsToWords(filterValue)
+            console.log('filterValue is', filterValue)
             const className = container.getAttribute('class') || ''
             const hiddenPart = `hide-${filterValue}`
             const parts = className.split(' ').filter(x => x != hiddenPart)
