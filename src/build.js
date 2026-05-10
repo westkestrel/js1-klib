@@ -32,7 +32,7 @@ function main() {
         helpContent[file.replace('.js', '').toLowerCase()] = extractHelpContent(content)
         all.push(versionedContent)
         console.log('updating', dst)
-        writeFileSync(dst, license + versionedContent, ENCODING)
+        writeIfChanged(dst, license + versionedContent)
     }
     const dst = `dist/klib.js`
     console.log('updating', dst)
@@ -71,6 +71,27 @@ function updateReadmeBlock(block, helpContent) {
     }
     console.log(`...for ${name}`)
     return `${name}\n\n${help}\n`
+}
+
+function writeIfChanged(path, content) {
+    if (existsSync(path) && !hasMeaningfulChanges(readFileSync(path, ENCODING), content)) {
+        console.log(`...no changes for ${path}`)
+        return
+    }
+    writeFileSync(path, content, ENCODING)
+}
+
+function hasMeaningfulChanges(oldContent, newContent) {
+    const oldLines = oldContent.split('\n').filter(line => line != '')
+    const newLines = newContent.split('\n').filter(line => line != '')
+    if (oldLines.length != newLines.length) return true
+    for (var i=0; i<oldLines.length; i++) {
+        if (oldLines[i] == newLines[i]) continue
+        const oldWithoutVersion = oldLines[i].replace(/version \d+\.\d+\.\d+/i, '')
+        const newWithoutVersion = newLines[i].replace(/version \d+\.\d+\.\d+/i, '')
+        if (oldWithoutVersion != newWithoutVersion) return true
+    }
+    return false
 }
 
 main()

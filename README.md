@@ -6,6 +6,10 @@ This project folder contains JavaScript code that is intended to be used with HT
 
 To use the scripts, simply copy the ones you want to use from the *dist/* folder into your own project and include them in your HTML via a `<script>` tag.  If you want to use all of the scripts, use the *klib.js* script which is simply a concatenation of all the others.
 
+### Version numbers
+
+The first comment in each script in the *dist/* folder contains a version number. These version numbers may differ; if the package was versioned but an individual file did not change then its version number will remain unchanged.
+
 ## Script descriptions
 
 ### Collapsible
