@@ -2,8 +2,9 @@
  * Filterbox allows you to use checkboxes to show and hide rows of data.
  *
  * To use it, you ensure that your HTML has a controls block. Note that if you omit the
- * id="" and for="" tags on the input and label, they will be inferred from the
+ * `id=""` and `for=""` tags on the input and label, they will be inferred from the
  * label contents.  In the code below
+ *
  * - the first checkbox toggles "cats" (despite the label being "Felines")
  * - the second toggles "dogs" (inferred from the label)
  * - the third toggles "bugs", and ignores the explanatory text after the colon
@@ -12,6 +13,7 @@
  * - the sixth toggles "birds-and-bees" (spaces become hyphens)
  * - the seventh toggles both "birds" and "Bees" (commas separate items)
  *
+ * ```html
  * <ul class="filterbox-controls filter-animals">
  * <li><input type="checkbox" id="cats"><label for="cats">Felines</label></li>
  * <li><input type="checkbox"><label>Dogs</label></li>
@@ -21,9 +23,11 @@
  * <li><input type="checkbox"><label>Birds and Bees</label></li>
  * <li><input type="checkbox"><label>Birds, Bees</label></li>
  * </ul>
+ * ```
  *
  * Your HTML also must have a data block:
  *
+ * ```html
  * <table class="filterbox-data filter-animals">
  * <th>...</th>
  * <tr class="cats">...</tr>
@@ -35,6 +39,7 @@
  * <tr class="bees">...</tr>
  * <tr class="birds-and-bees">...</tr>
  * </table>
+ * ```
  *
  * When the user toggles the checkbox for a given id, all data elements with that
  * CSS class have their visibility toggled. In the case above if the user toggles

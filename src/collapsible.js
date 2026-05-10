@@ -10,11 +10,13 @@
  * practice for it to do so as this helps with the accessibility of your web page.
  *
  * e.g.,
+ * ```html
  * <section class="collapsible-section">
  * <h2><button>Rutabagas</button></h2>
  * <p>Rutabagas are a vegetable.</p>
  * <p>Some people like them. Some people don't</p>
  * </section>
+ * ```
  */
  
 const collapsibleBootstrap = () => {
