@@ -12,7 +12,7 @@ The first comment in each script in the *dist/* folder contains a version number
 
 ## Script descriptions
 
-### Collapsible
+### collapsible.js
 
 
 Collapsible allows you to expand and collapse sections with the click of the mouse.
@@ -34,7 +34,7 @@ e.g.,
 </section>
 ```
 
-### Filterbox
+### filterbox.js
 
 
 Filterbox allows you to use checkboxes to show and hide rows of data.

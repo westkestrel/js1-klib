@@ -10,16 +10,18 @@ const ENCODING = { encoding: 'utf8' }
 
 function main() {
     const version = getProjectVersion()
-    const files = readdirSync('src').filter(f => f != 'build.js')
+    const files = readdirSync('src').filter(f => f != 'build.js' && f.indexOf('.') > 0)
     const licenseLines = readFileSync('LICENSE.txt', { encoding: 'utf8' }).split('\n').map(line => `* ${line}`)
-    const all = []
+    const allJavaScript = []
+    const allStyles = []
     const helpContent = {}
     licenseLines.splice(0, 0, '/**')
     licenseLines.push('*/')
     licenseLines.push('')
     licenseLines.push('')
     const license = licenseLines.join('\n')
-    all.push(license)
+    allJavaScript.push(license)
+    allStyles.push(license)
     if (!existsSync('dist')) {
         console.log(`mkdir dist`)
         mkdirSync('dist')
@@ -29,14 +31,20 @@ function main() {
         const dst = `dist/${file}`
         const content = readFileSync(src, ENCODING)
         const versionedContent = injectVersion(content, version)
-        helpContent[file.replace('.js', '').toLowerCase()] = extractHelpContent(content)
-        all.push(versionedContent)
-        console.log('updating', dst)
+        helpContent[file.toLowerCase()] = extractHelpContent(content)
+        if (file.endsWith('.js')) allJavaScript.push(versionedContent)
+        if (file.endsWith('.css')) allStyles.push(versionedContent)
         writeIfChanged(dst, license + versionedContent)
     }
-    const dst = `dist/klib.js`
-    console.log('updating', dst)
-    writeFileSync(dst, all.join('\n\n'), ENCODING)
+    
+    const javaScriptDst = `dist/klib.js`
+    console.log('updating', javaScriptDst)
+    writeFileSync(javaScriptDst, allJavaScript.join('\n\n'), ENCODING)
+
+    const styleDst = `dist/klib.css`
+    console.log('updating', styleDst)
+    writeFileSync(styleDst, allStyles.join('\n\n'), ENCODING)
+
     var readmeBlocks = readFileSync('README.md', ENCODING).split(/^### /m)
     console.log('updating README.md')
     var readmeContent = readmeBlocks.map(b => updateReadmeBlock(b, helpContent)).join('### ')
@@ -60,10 +68,10 @@ function extractHelpContent(content) {
 }
 
 function updateReadmeBlock(block, helpContent) {
-    const nameMatches = block.match(/^[\w-]+/)
+    const nameMatches = block.match(/^[\w.-]+/)
     if (!nameMatches) return block
     const name = nameMatches[0]
-    const key = name.replace('.js', '').toLowerCase()
+    const key = name.toLowerCase()
     const help = helpContent[key] || helpContent[name] || helpContent[name.toLowerCase()]
     if (!help) {
         console.warn(`no README content found for ${name}`)
@@ -75,9 +83,10 @@ function updateReadmeBlock(block, helpContent) {
 
 function writeIfChanged(path, content) {
     if (existsSync(path) && !hasMeaningfulChanges(readFileSync(path, ENCODING), content)) {
-        console.log(`...no changes for ${path}`)
+        console.log(`no changes for ${path}`)
         return
     }
+    console.log(`updating ${path}`)
     writeFileSync(path, content, ENCODING)
 }
 
