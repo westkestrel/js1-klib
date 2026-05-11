@@ -23,7 +23,7 @@
 
 
 
-/** (version 0.2.0)
+/** (version 0.3.0)
  * Collapsible allows you to expand and collapse sections with the click of the mouse.
  *
  * To use it, you have a give a container (typically a DIV, SECTION, or TABLE) the class
@@ -102,7 +102,7 @@ window.addEventListener('load', wireUpCollapsibles)
 collapsibleBootstrap()
 
 
-/** (version 0.2.0)
+/** (version 0.3.0)
  * Filterbox allows you to use checkboxes to show and hide rows of data.
  *
  * To use it, you ensure that your HTML has a controls block. Note that if you omit the
@@ -370,7 +370,7 @@ window.addEventListener('load', wireUpAllFilterControlContainers)
 filterboxBootstrap()
 
 
-/** (version 0.2.0)
+/** (version 0.3.0)
  * Navigation Without Bookmarks allows the user to click anchor links (e.g., <a href="#foo">)
  * to jump to that portion of the web page without adding the anchor to the end of the
  * URL.
@@ -411,7 +411,7 @@ window.addEventListener('load', wireUpNavigationLinks)
 navigationWithoutBookmarksBootstrap()
 
 
-/** (version 0.2.0)
+/** (version 0.3.0)
  * Radio Checkbox Groups allow you to have checkboxes which behave like radio buttons
  * when Command-clicked or long-pressed.
  *
@@ -656,7 +656,7 @@ window.addEventListener('load', wireUpRadioGroups)
 radioCheckboxGroupsBootstrap()
 
 
-/** (version 0.2.0)
+/** (version 0.3.0)
  * Stored Checkbox State preserves checkbox state between webpage reloads.
  *
  * If you decorate a container with `class="stored-checkbox-state"` then any checkboxes
