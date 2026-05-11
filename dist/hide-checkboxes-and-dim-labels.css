@@ -28,7 +28,8 @@
  *      </ul>
  *
  * These CSS rules will hide the checkbox and will instead dim the label text when
- * the checkbox is unchecked.
+ * the checkbox is unchecked. Note that the hidden checkbox is still interactive since
+ * it has a label that the user can click on.
  */
  
 .hide-checkboxes-and-dim-labels input[type=checkbox] {

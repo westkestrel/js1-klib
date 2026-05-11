@@ -4,11 +4,11 @@ This project folder contains JavaScript code that is intended to be used with HT
 
 ## Installation
 
-To use the scripts, simply copy the ones you want to use from the *dist/* folder into your own project and include them in your HTML via a `<script>` tag.  If you want to use all of the scripts, use the *klib.js* script which is simply a concatenation of all the others.
+To use the scripts and/or stylesheets, simply copy the ones you want to use from the *dist/* folder into your own project and include them in your HTML via a `<script>` tag.  If you want to use all of the scripts, include the *klib.js* script which is simply a concatenation of all the others. If you want to use all of the stylesheets, include the *klib.css* stylesheet.
 
 ### Version numbers
 
-The first comment in each script in the *dist/* folder contains a version number. These version numbers may differ; if the package was versioned but an individual file did not change then its version number will remain unchanged.
+The first non-LICENSE comment in each script in the *dist/* folder contains a version number using the **semantic versioning** convention. These version numbers may vary from file to file; if the package was versioned but an individual file did not change then its version number will remain unchanged.
 
 ## Script descriptions
 
@@ -136,4 +136,55 @@ Stored Checkbox State preserves checkbox state between webpage reloads.
 
 If you decorate a container with `class="stored-checkbox-state"` then any checkboxes
 within it will have their state preserved in local storage between launches.
+
+### collapsible.css
+
+
+Styling rules for use with the *collapsible.js* script. You can use these styles, or
+can disregard them and do your own styling; the script works correctly in either case.
+
+To use these styles, add the following CSS class names to an ancestor element of
+your collapsible sections (e.g., the `body` tag).
+- (no class required): buttons in collapse-control element (the first child of the element with the collapsible-section class) are styled like ordinary content.
+- dim-when-collapsed: the collapse-control element is rendered semi-transparent when the content is collapsed.
+- line-through-when-collapsed: the collapse-control element has a line drawn through it when the content is collapsed. This can be combined with dimming.
+- rotate-chevron-when-collapsed: the collapse-control element is prefixed with a downward-pointing triangle, which is rotated to point to the right when the content is collapsed.
+- animate-when-collapsed: the collapsing content shrinks to nothing rather than simply disappearing. Note that this does not behave correctly if the collapsing content consists of table rows, as table rows do not honour min-height.
+
+### hide-checkboxes-and-dim-labels.css
+
+
+Given a DOM structure like
+     <ul class="hide-checkboxes-and-dim-labels">
+         <li><input type="checkbox" id="a"><label for="a">My Label</label></li>
+     </ul>
+
+These CSS rules will hide the checkbox and will instead dim the label text when
+the checkbox is unchecked. Note that the hidden checkbox is still interactive since
+it has a label that the user can click on.
+
+### hide-checkboxes-and-line-through-labels.css
+
+
+Given a DOM structure like
+     <ul class="hide-checkboxes-and-line-through-labels">
+         <li><input type="checkbox" id="a"><label for="a">My Label</label></li>
+     </ul>
+
+These CSS rules will hide the checkbox and will instead dim the label text and draw
+a line through it when the checkbox is unchecked.  Note that the hidden checkbox is
+still interactive since it has a label that the user can click on.
+
+### hide-checkboxes-and-use-disclosures.css
+
+
+Given a DOM structure like
+     <ul class="hide-checkboxes-and-use-disclosures">
+         <li><input type="checkbox" id="a"><label for="a">My Label</label></li>
+     </ul>
+
+These CSS rules will hide the checkbox and will instead draw a disclosure triangle.
+When the checkbox is checked and unchecked the triangle will animate a rotation from
+pointing right to pointing down.   Note that the hidden checkbox is still interactive
+since it has a label that the user can click on.
 

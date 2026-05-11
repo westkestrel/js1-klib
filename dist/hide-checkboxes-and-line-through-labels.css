@@ -28,7 +28,8 @@
  *      </ul>
  *
  * These CSS rules will hide the checkbox and will instead dim the label text and draw
- * a line through it when the checkbox is unchecked.
+ * a line through it when the checkbox is unchecked.  Note that the hidden checkbox is
+ * still interactive since it has a label that the user can click on.
  */
  
 .hide-checkboxes-and-line-through-labels input[type=checkbox] {
