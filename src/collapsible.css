@@ -33,20 +33,6 @@
     text-decoration-line: line-through;
 }
 
-.rotate-chevron-when-collapsed .collapsible-section > :not(:first-child) {
-    display: block !important; /* must override the display:none injected by the JavaScript */
-    max-height: 200vh;
-    overflow: hidden;
-    transition: margin-top 0.5s, margin-bottom 0.5s, padding-top 0.5s, padding-bottom 0.5s, max-height 0.5s;
-}
-.rotate-chevron-when-collapsed .collapsible-section.collapsed > :not(:first-child) {
-    max-height: 0;
-    margin-top: 0;
-    margin-bottom: 0;
-    padding-top: 0;
-    padding-bottom: 0;
-    transition: margin-top 0.5s, margin-bottom 0.5s, padding-top 0.5s, padding-bottom 0.5s, max-height 0.5s;
-}
 .rotate-chevron-when-collapsed .collapsible-section > :first-child button::before,
 .rotate-chevron-when-collapsed.collapsible-section > :first-child button::before {
     display: inline-block;
@@ -63,4 +49,21 @@
 .rotate-chevron-when-collapsed.collapsible-section.collapsed > :first-child button::before {
     transform: rotate(0deg);
     transition: transform 0.5s ease;
+}
+
+.animate-when-collapsed .collapsible-section > :not(:first-child),
+.animate-when-collapsed .collapsible-section > tr:not(:first-child) > * {
+    display: block !important; /* must override the display:none injected by the JavaScript */
+    max-height: 200vh;
+    overflow: hidden;
+    transition: margin-top 0.5s, margin-bottom 0.5s, padding-top 0.5s, padding-bottom 0.5s, max-height 0.5s;
+}
+.animate-when-collapsed .collapsible-section.collapsed > :not(:first-child),
+.animate-when-collapsed .collapsible-section.collapsed > tr:not(:first-child) > * {
+    max-height: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    transition: margin-top 0.5s, margin-bottom 0.5s, padding-top 0.5s, padding-bottom 0.5s, max-height 0.5s;
 }

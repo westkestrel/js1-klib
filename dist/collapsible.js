@@ -21,7 +21,7 @@
 * 
 */
 
-/** (version 0.1.0)
+/** (version 0.3.0)
  * Collapsible allows you to expand and collapse sections with the click of the mouse.
  *
  * To use it, you have a give a container (typically a DIV, SECTION, or TABLE) the class
@@ -51,14 +51,17 @@ const getLocalStorageKey = (element) => {
 
 const toggle = (event) => {
     var container = event.target
-    while (container && (container.getAttribute('class') || '').indexOf('collapsible-section') == -1) {
-        container = container.parentElement
+    var className = null
+    while (container) {
+        className = container.getAttribute('class') || ''
+        if (className.indexOf('collapsible-section') != -1) break;
+        container = container.parentNode
     }
     if (!container) {
         console.error('no collapsible-section found!')
         return
     }
-    const shouldCollapse = container.getAttribute('class').split(' ').indexOf('collapsed') === -1
+    const shouldCollapse = className.split(' ').indexOf('collapsed') === -1
     const containers = event.metaKey ? document.getElementsByClassName('collapsible-section') : [container]
     for (container of containers) {
         window.localStorage.setItem(getLocalStorageKey(container.firstElementChild), shouldCollapse)

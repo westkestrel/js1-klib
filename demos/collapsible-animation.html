@@ -12,14 +12,15 @@ th {
 </style>
 <script src="../dist/collapsible.js"></script>
 </head>
-<body class="rotate-chevron-when-collapsed">
+<body class="rotate-chevron-when-collapsed animate-when-collapsed">
 <h1>Collapsible demo using animated chevrons</h1>
 <p>
 This HTML page demonstrates how to use the <em>collapsible.js</em> script to expand and collapse sections of your page
 using CSS animation.
 The page consists of several <code>&lt;section class="collapsible-section"&gt;</code> tags,
 each of which contains a heading followed by one or more paragraphs of content.
-Click the headings below to show and hide their content.
+The <code>body</code> tag has <code>class="rotate-chevron-when-collapsed animate-when-collapsed"</code> to trigger
+the two animations that you see below when you click the headings below to show and hide their content.
 </p>
 <p>
 The visual styling of the headings when hovered and when collapsed comes from the <em>collapsible.css</em> file.
@@ -66,14 +67,20 @@ Duis nunc erat, vehicula vel purus at, sagittis pulvinar libero. Donec a felis a
 Observe that this paragraph will remain visible when in the "expanded" state, no matter how small you make the browser window.
 </p>
 </section>
-<table>
+<table cellpadding="0" cellspacing="0">
 <tbody class="collapsible-section">
 <tr><th>
 <h2><button>Minerals (table body)</button></h2>
 </th></tr>
 <tr><td class="explanation">
+<p>
 This is a table whose <code>&lt;tbody&gt;</code> has been given the <code>collapsible-section</code> class,
 and whose first row contains the heading.
+Note that even when collapsed there is quite a bit of whitespace.  The <code>max-height</code> CSS property can not be used to reduce the height of a row or cell to zero; if it has content then it will always have a minimum height approximately equal to the font size.
+</p>
+<p>
+So... you unfortunately cannot use this script to animate the collapse and expansion of table rows.
+</p>
 </td></tr>
 <tr><td>
 Praesent nibh purus, elementum ut tortor nec, interdum maximus eros. Phasellus accumsan non magna eu convallis. Donec et fringilla dolor, at posuere sem. Maecenas rhoncus ipsum in mollis facilisis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aliquam massa sapien, pellentesque in hendrerit laoreet, tincidunt vel nisl. Suspendisse potenti. Pellentesque eu nisl ut sapien lobortis faucibus non sed odio. Aliquam vulputate arcu ac magna cursus rutrum nec in turpis. Curabitur vel arcu in leo vestibulum auctor.
