@@ -29,6 +29,9 @@ input[type="checkbox"] {
     margin-right: 0.5em;
 }
 
+.explanation {
+    font-size: larger;
+}
 .horizontal-group {
     display: flex;
     flex-direction: row;

@@ -62,14 +62,18 @@
     display: block !important; /* must override the display:none injected by the JavaScript */
     max-height: 200vh;
     overflow: hidden;
-    transition: max-height 0.5s ease;
+    transition: margin-top 0.5s, margin-bottom 0.5s, padding-top 0.5s, padding-bottom 0.5s, max-height 0.5s;
 }
 .rotate-chevron-when-collapsed .collapsible-section.collapsed > :not(:first-child) {
     max-height: 0;
-    transition: max-height 0.5s ease;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    transition: margin-top 0.5s, margin-bottom 0.5s, padding-top 0.5s, padding-bottom 0.5s, max-height 0.5s;
 }
-.rotate-chevron-when-collapsed .collapsible-section > :first-child::before,
-.rotate-chevron-when-collapsed.collapsible-section > :first-child::before {
+.rotate-chevron-when-collapsed .collapsible-section > :first-child button::before,
+.rotate-chevron-when-collapsed.collapsible-section > :first-child button::before {
     display: inline-block;
     width: 1em;
     height: 1em;
@@ -80,8 +84,8 @@
     transform: rotate(90deg);
     transition: transform 0.5s ease;
 }
-.rotate-chevron-when-collapsed .collapsible-section.collapsed > :first-child::before,
-.rotate-chevron-when-collapsed.collapsible-section.collapsed > :first-child::before {
+.rotate-chevron-when-collapsed .collapsible-section.collapsed > :first-child button::before,
+.rotate-chevron-when-collapsed.collapsible-section.collapsed > :first-child button::before {
     transform: rotate(0deg);
     transition: transform 0.5s ease;
 }
