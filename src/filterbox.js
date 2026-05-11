@@ -45,6 +45,18 @@
  * CSS class have their visibility toggled. In the case above if the user toggles
  * the last checkbox both the "birds" and "bees" rows will be hidden, but not the
  * "birds-and-bees" row.
+ *
+ * ***
+ *
+ * Filterbox pairs very nicely with checkbox-radio-group, which allow the user to
+ * command-click (or long-press) to toggle the visibility of all items *except* the one
+ * they just selected, and with stored-checkbox-state, which preserves checkbox state
+ * across page-loads using local storage.
+ *
+ * If you do use that other file you must include it *after* this file, so that this file's
+ * setup will have created the checkbox html elements (and attached its event listeners)
+ * before those files attempt to work with them.
+ *
  */
  
 const filterboxBootstrap = () => {

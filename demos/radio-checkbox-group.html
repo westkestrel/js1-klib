@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Radio checkbox groups demo</title>
+<link rel='stylesheet' href='style.css'>
+<script src="../dist/radio-checkbox-group.js"></script>
+</head>
+<body>
+<h1>Radio checkbox groups demo</h1>
+<p>
+The first set of checkboxes has the CSS class <code>radio-checkbox-group</code> applied to its containing element.
+In addition to behaving like a standard checkbox (toggling state when you click either the checkbox or its label)
+these checkboxes can also behave like radio buttons.
+If you long-press (or Command-click on a Mac, or Control-click on Windows) then that checkbox is selected and all of the others are deselected.
+Long-pressing again selects all checkboxes.
+</p>
+<p>
+If you have a set of checkboxes that are often, but not always, mutually exclusive this is a good user-experience enhancement.
+You can select <strong>peach rhubarb</strong> pie with a single long-press on <strong>peach</strong> followed by a click on <strong>rhubarb</strong>,
+whereas selecting both <strong>rational</strong> and <strong>imaginary</strong> numbers &mdash; but no others &mdash; requires four separate clicks on the items that you are <em>not</em> interested in.
+</p>
+<div class="horizontal-group">
+<ul class="radio-checkbox-group">
+<li><h2>Types of pies</h2></li>
+<li><input type="checkbox" checked id="apple"/><label for="apple">Apple</label></li>
+<li><input type="checkbox" checked id="blueberry"/><label for="blueberry">Blueberry</label></li>
+<li><input type="checkbox" checked id="cherry"/><label for="cherry">Cherry</label></li>
+<li><input type="checkbox" checked id="peach"/><label for="peach">Peach</label></li>
+<li><input type="checkbox" checked id="rhubarb"/><label for="rhubarb">Rhubarb</label></li>
+<li><input type="checkbox" checked id="strawberry"/><label for="strawberry">Strawberry</label></li>
+</ul>
+<ul>
+<li><h2>Types of numbers</h2></li>
+<li><input type="checkbox" checked id="natural"/><label for="natural">Natural numbers</label></li>
+<li><input type="checkbox" checked id="whole"/><label for="whole">Whole numbers</label></li>
+<li><input type="checkbox" checked id="integer"/><label for="integer">Integers</label></li>
+<li><input type="checkbox" checked id="rational"/><label for="rational">Rational numbers</label></li>
+<li><input type="checkbox" checked id="irrational"/><label for="irrational">Irrational numbers</label></li>
+<li><input type="checkbox" checked id="imaginary"/><label for="imaginary">Imaginary numbers</label></li>
+</ul>
+</div>
+</body>
+</html>

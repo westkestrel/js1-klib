@@ -84,3 +84,38 @@ CSS class have their visibility toggled. In the case above if the user toggles
 the last checkbox both the "birds" and "bees" rows will be hidden, but not the
 "birds-and-bees" row.
 
+***
+
+Filterbox pairs very nicely with checkbox-radio-group, which allow the user to
+command-click (or long-press) to toggle the visibility of all items *except* the one
+they just selected, and with stored-checkbox-state, which preserves checkbox state
+across page-loads using local storage.
+
+If you do use that other file you must include it *after* this file, so that this file's
+setup will have created the checkbox html elements (and attached its event listeners)
+before those files attempt to work with them.
+
+
+### radio-checkbox-group.js
+
+
+Radio Checkbox Groups allow you to have checkboxes which behave like radio buttons
+when Command-clicked or long-pressed.
+
+To use it, add the class 'radio-checkbox-group' to a container.  Now any checkboxes
+within the container will behave normally when toggled, unless the Command key (on
+a mac) or Control key (on Windows) is held, or if the checkbox is long-pressed on a
+phone or tablet or long-clicked on computer.  Any of these gestures will trigger the
+radio-checkbox-group behavior.
+
+The radio-checkbox-group behavior is very straightforward. If any checkbox other than
+the target is checked then the target will be "soloed", which is to say that it will
+be checked and all of the others will be unchecked. If all checkboxes other than the
+target are unchecked then the soloing will be cancelled and all checkboxes will be
+checked.
+
+Note that soloing and de-soloing will trigger **change** events for many of the
+checkboxes in the group. If your change-handling code needs to know which checkbox
+was actually clicked, you can check `event.target.isSoloTarget`; this will be `true`
+for the checkbox the user clicked on and `undefined` for all the rest.
+
