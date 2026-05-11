@@ -72,6 +72,47 @@
  
 const filterboxBootstrap = () => {
 
+/**
+ * By default the script looks for combo values, but you can disable this if you
+ * do not use combos and have a sufficiently-large data set that the search is
+ * causing performance problems.
+ *
+ * A combo is a data class that contains more than one of the filtered values, e.g.,
+ *      <div class="filterbox-controls filter-traits">
+ *        <div><input type="checkbox"><label>Eggs</label></div>
+ *        <div><input type="checkbox"><label>Lactation</label></div>
+ *        <div><input type="checkbox"><label>Scales</label></div>
+ *      </div>
+ *      <ul class="filterbox-data">
+ *        <li class="lactation">Cat<li>
+ *        <li class="eggs">Robin<li>
+ *        <li class="eggs lactation">Platypus<li>
+ *        <li class="scales">Snake<li>
+ *      </ul>
+ *
+ * Without looking for combos, checking "Eggs" and not "Lactation" will result
+ * in both "Cat" and "Platypus" being hidden due to the simple CSS rules
+ *      .filterbox-data.filter-traits.hide-eggs .eggs { display: none }
+ *      .filterbox-data.filter-traits.hide-lactation .lactation { display: none }
+ *      .filterbox-data.filter-traits.hide-scales .scales { display: none }
+ *
+ * With combos enabled, checking "Eggs" and not "Lactation" will reveal both
+ * "Robin" and "Platypus" because of a more sophisticated set of rules
+ *      .filterbox-data.filter-traits.hide-eggs.hide-lactations .eggs.lactation { display: none }
+ *      .filterbox-data.filter-traits.hide-eggs .eggs:not(.eggs.lactation) { display: none }
+ *      .filterbox-data.filter-traits.hide-lactation .lactation:not(.eggs.lactation) { display: none }
+ *      .filterbox-data.filter-traits.hide-scales .scales { display: none }
+ *
+ * Note that checking "eggs" and unchecking "scales" hides the snake because the "Snake"
+ * line item does not have the "eggs" css class (though it probably should). If it did,
+ * then rules would have been constructed to handle that scenario as well.
+ */
+const shouldLookForCombos = true
+
+/**
+ * Turn '3d' into 'three-d' and '32flavors' into 'three-two-flavors' since CSS class names
+ * cannot begin with a digit.
+ */
 const digitsToWords = (text) => {
     return text
         .replace('0', 'zero-')
@@ -84,8 +125,25 @@ const digitsToWords = (text) => {
         .replace('7', 'seven-')
         .replace('8', 'eight-')
         .replace('9', 'nine-')
+        .replace(/\W+/g, '-')
 }
 
+/**
+ * Given '3 Musketeers' return 'three-musketeers'
+ */
+const textToCssClass = text => {
+    return digitsToWords(text).replace(/\W+/, '-').toLocaleLowerCase()
+}
+
+/**
+ * Adds a class to all filterbox-data containers to hide (or not hide) elements with
+ * the given filtered values for a given filter-value type. e.g. given 'animal', 'cat',
+ * and 'false', it will turn
+ *    <div class="filterbox-data animal">
+ * into
+ *    <div class="filterbox-data animale hide-cat">
+ * so that the CSS rules will hide all <div class="cat"> child elements.
+ */
 const setVisibility = (filterType, filterClassName, flag) => {
     const targetClassName = `filterbox-data ${filterType}`
     const filterContainers = document.getElementsByClassName(targetClassName)
@@ -107,68 +165,101 @@ const setVisibility = (filterType, filterClassName, flag) => {
     }
 }
 
-const wireUpCheckboxes = () => {
-    const cssRules = []
-    const filters = document.getElementsByClassName('filterbox-controls')
-    var metaKey = false
-    const captureMetaKey = event => { metaKey = event.metaKey }
-    for (filter of filters) {
-        const filterType = filter.getAttribute('class').split(' ').filter(x => x.startsWith('filter-'))[0]
-        if (!filterType) {
-            console.error('filterbox-controls lacks a filter-TYPE class:', filter)
-            continue
+/**
+ * Given an HTML container element, decorate any <input type="checkbox"> elements with
+ * change-event listeners that will toggle the visibility of corresponding data elements
+ * in any filterbox-data containers.
+ *
+ * The passed cssRules array will be populated with CSS rules that should be injected
+ * into the document's <head> to actually accomplish the visibility changes.
+ */
+const wireUpFilterControlContainer = (container, cssRules) => {
+    const filterType = container.getAttribute('class').split(' ').filter(x => x.startsWith('filter-'))[0]
+    if (!filterType) {
+        console.error('filterbox-controls lacks a filter-TYPE class:', container)
+        return
+    }
+    var filterableValues = []
+    const toggles = container.getElementsByTagName('input')
+    for (toggle of toggles) {
+        const toggleId = toggle.getAttribute('id')
+        const label = toggle.nextElementSibling
+        const filterValues = toggleId
+            ? [toggleId]
+            : label.innerHTML
+                .replace(/<span class="text">(.*?)<\/span>\s*/m, '$1')
+                .replace(/<span class="icon">(.*?)<\/span>\s*/m, '')
+                .toLocaleLowerCase()
+                .replace(/ *[(].*[)]/, '')
+                .replace(/:.*/, '')
+                .split(/, */)
+                .map(x => x.replace(/\W+/g, ' ').trim().replace(/ /g, '-'))
+        filterableValues.push(...filterValues)
+        const filterId = `${filterType}-${filterValues.join('-')}`
+        const filterClassName = filterValues.join(' ')
+        if (!toggleId) { toggle.setAttribute('id', filterId) }
+        if (!toggle.getAttribute('class')) { toggle.setAttribute('class', filterClassName) }
+        const stateChange = event => {
+            setVisibility(filterType, filterClassName, event.target.checked)
         }
-        const toggles = filter.getElementsByTagName('input')
-        for (toggle of toggles) {
-            const toggleId = toggle.getAttribute('id')
-            const label = toggle.nextElementSibling
-            const filterValues = toggleId
-                ? [toggleId]
-                : label.innerHTML
-                    .replace(/<span class="text">(.*?)<\/span>\s*/m, '$1')
-                    .replace(/<span class="icon">(.*?)<\/span>\s*/m, '')
-                    .toLocaleLowerCase()
-                    .replace(/ *[(].*[)]/, '')
-                    .replace(/:.*/, '')
-                    .split(/, */)
-                    .map(x => x.replace(/\W+/g, ' ').trim().replace(/ /g, '-'))
-            const filterId = `${filterType}-${filterValues.join('-')}`
-            const filterClassName = filterValues.join(' ')
-            if (!toggleId) { toggle.setAttribute('id', filterId) }
-            if (!toggle.getAttribute('class')) { toggle.setAttribute('class', filterClassName) }
-            label.setAttribute('for', toggleId || filterId)
-            toggle.addEventListener('mousedown', captureMetaKey)
-            toggle.addEventListener('mouseup', captureMetaKey)
-            label.addEventListener('mousedown', captureMetaKey)
-            label.addEventListener('mouseup', captureMetaKey)
-            toggle.addEventListener('change', event => {
-                if (metaKey) {
-                    const wasChecked = event.target.checked
-                    var allOthersWereChecked = true
-                    for (t of toggles) {
-                        if (t.getAttribute('id') != event.target.getAttribute('id')) {
-                            allOthersWereChecked = allOthersWereChecked && t.checked
-                        }
-                    }
-                    for (t of toggles) {
-                        if (t.getAttribute('id') != event.target.getAttribute('id')) {
-                            t.checked = !allOthersWereChecked
-                            setVisibility(filterType, t.getAttribute('class'), !allOthersWereChecked)
-                        } else {
-                            t.checked = !wasChecked
-                            setVisibility(filterType, filterClassName, t.checked)
-                        }
-                    }
-                } else {
-                    setVisibility(filterType, filterClassName, event.target.checked)
+        label.setAttribute('for', toggleId || filterId)
+        toggle.addEventListener('change', stateChange)
+        toggle.checked = true
+    }
+    if (!shouldLookForCombos) {
+        // without combos the hiding rules are very simple
+        for (filterValue of filterableValues) {
+            filterValue = textToCssClass(filterValue)
+            cssRules.push(`.filterbox-data.${filterType}.hide-${filterValue} .${filterValue} { display: none }`)
+        }
+    } else {
+        // first, go through all data containers looking for combos
+        const combos = new Set() // e.g., {'audio & video', 'photo & video'}
+        const classes = new Set(filterableValues.map(textToCssClass))
+        for (dataContainer of document.getElementsByClassName('filterbox-data')) {
+            for (dataElement of dataContainer.children) {
+                const cssClass = dataElement.getAttribute('class') || ''
+                const classNames = cssClass.split(/ +/).filter(s => classes.has(s))
+                if (classNames.length > 1) {
+                    const sortedClassNames = classNames.sort()
+                    combos.add(sortedClassNames.join(' & '))
                 }
-            })
-            toggle.checked = true
-            for (filterValue of filterValues) {
-                filterValue = digitsToWords(filterValue)
-                cssRules.push(`.filterbox-data.${filterType}.hide-${filterValue} .${filterValue} { display: none }`)
             }
         }
+        const comboArrays = Array.from(combos).sort().map(c => c.split(' & ')) // e.g., [['audio', 'video'], ['photo', 'video']]
+        const comboValues = new Set(comboArrays.flat()) // e.g., {'audio', 'photo', 'video'}
+        
+        // second, emit the simple rules for values which are never part of a combo
+        for (filterValue of filterableValues.filter(v => !comboValues.has(v))) {
+            filterValue = textToCssClass(filterValue)
+            cssRules.push(`.filterbox-data.${filterType}.hide-${filterValue} .${filterValue} { display: none }`)
+        }
+        
+        // third, emit rules for hiding a combo if all of its elements are hidden
+        for (combo of comboArrays) {
+            const comboClass = combo.join('.')
+            const hideClasses = combo.map(v => `.hide-${v}`).join('')
+            cssRules.push(`.filterbox-data.${filterType}${hideClasses} .${comboClass} { display: none }`)
+        }
+        
+        // finally, emit rules for hiding a row if it has some 
+        const comboClassArray = comboArrays.map(a => '.' + a.join('.')) // e.g., ['.audio.video', '.photo.video']
+        const notAnyCombo = comboClassArray.map(c => `:not(${c})`).join('')
+        for (filterValue of Array.from(comboValues).sort()) {
+            cssRules.push(`.filterbox-data.${filterType}.hide-${filterValue} .${filterValue}${notAnyCombo} { display: none }`)
+        }
+    }
+}
+
+/**
+ * Locates all HTML container elements with class 'filterbox-controls' and wires up the
+ * checkboxes within them as visibility controls.
+ */
+const wireUpAllFilterControlContainers = () => {
+    const cssRules = []
+    const filterControlContainers = document.getElementsByClassName('filterbox-controls')
+    for (container of filterControlContainers) {
+        wireUpFilterControlContainer(container, cssRules)
     }
     const head = document.getElementsByTagName('head')[0]
     const style = document.createElement('style')
@@ -177,7 +268,7 @@ const wireUpCheckboxes = () => {
     head.appendChild(style)
 }
 
-window.addEventListener('load', wireUpCheckboxes)
+window.addEventListener('load', wireUpAllFilterControlContainers)
  
 }
 filterboxBootstrap()

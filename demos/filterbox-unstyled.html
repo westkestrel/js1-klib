@@ -18,12 +18,18 @@ Click the filters below to show and hide their content.
 Things to observe when you inspect the page elements as you interact with the page:
 <ul>
 <li>
-Each of the content paragraphs is decorated with CSS classes (e.g., <code>fur</code> and <code>four-legs</code> for <strong>cat</strong>).
+Each of the content paragraphs is decorated with CSS classes (e.g., <code>fur</code> and <code>four-legs</code> for <strong>Cat</strong>).
 When you uncheck a checkbox a filter class (e.g., <code>hide-fur</code>) is added to the data container and any paragraphs with that value class are hidden.
 </li>
 <li>
+An animal shows up if it satisfies at least one checkbox in a column.
+For example, the dinosaur <strong>Psittacosaurus</strong> has both feathers and scales, so either checkbox will make it visible.
+This is a bit counter-intuitive as the data container has the class <code>hide-feathers</code> but the dinosaur is shown because <code>hide-scales</code> is not also present.
+<em>I had to choose between "show-XXX" and "hide-XXX" for the naming and went with "hide" because the CSS rules use <code>display: none</code>, even though the specific rule in this case only kicks in if both hide classes are present.</em>
+</li>
+<li>
 For an animal to show up it must satisfy at least one checkbox in <em>both</em> columns &mdash; if you hide either <strong>fur</strong> or <strong>4 legs</strong> the cat is hidden.
-This is because one column has class <code>filter-dermis</code> and the other has class <code>filter-legs</code>.
+This is because one column has class <code>filter-dermis</code> and the other has class <code>filter-legs</code> so the "show if any checkbox is satisfied" behaviour described above does not apply.
 </li>
 <li>
 When you toggle <strong>4 legs</strong> the class that is added is <code>hide-four-legs</code> &mdash; the number turns into a word.
@@ -57,6 +63,7 @@ When you toggle <strong>0 legs</strong> the class that is added is <code>hide-no
 <p class="fur two-legs">Gorilla</p>
 <p class="feathers two-legs">Eagle</p>
 <p class="feathers two-legs">Crow</p>
+<p class="feathers scales two-legs">Psittacosaurus</p>
 <p class="scales no-legs">Cobra</p>
 <p class="scales four-legs">Komodo Dragon</p>
 </section>
