@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Radio checkbox groups demo</title>
+<link rel='stylesheet' href='style.css'>
+<script src="../dist/stored-checkbox-state.js"></script>
+</head>
+<body>
+<h1>Stored checkbox state demo</h1>
+<p>
+The first set of checkboxes has the CSS class <code>radio-checkbox-group</code> applied to its containing element.
+Check several checkboxes in each column and reload the page.
+Observe that the first column preserved its checkbox state, and the second column reset all checkboxes.
+</p>
+<div class="horizontal-group">
+<ul class="stored-checkbox-state">
+<li><h2>Types of pies</h2></li>
+<li><input type="checkbox" id="apple"/><label for="apple">Apple</label></li>
+<li><input type="checkbox" id="blueberry"/><label for="blueberry">Blueberry</label></li>
+<li><input type="checkbox" id="cherry"/><label for="cherry">Cherry</label></li>
+<li><input type="checkbox" id="peach"/><label for="peach">Peach</label></li>
+<li><input type="checkbox" id="rhubarb"/><label for="rhubarb">Rhubarb</label></li>
+<li><input type="checkbox" id="strawberry"/><label for="strawberry">Strawberry</label></li>
+</ul>
+<ul>
+<li><h2>Types of numbers</h2></li>
+<li><input type="checkbox" id="natural"/><label for="natural">Natural numbers</label></li>
+<li><input type="checkbox" id="natural"/><label for="natural">Whole numbers</label></li>
+<li><input type="checkbox" id="integer"/><label for="integer">Integers</label></li>
+<li><input type="checkbox" id="rational"/><label for="rational">Rational numbers</label></li>
+<li><input type="checkbox" id="irrational"/><label for="irrational">Irrational numbers</label></li>
+<li><input type="checkbox" id="imaginary"/><label for="imaginary">Imaginary numbers</label></li>
+</ul>
+</div>
+</body>
+</html>

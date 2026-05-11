@@ -21,7 +21,7 @@
 * 
 */
 
-/** (version 0.1.0)
+/** (version 0.2.0)
  * Filterbox allows you to use checkboxes to show and hide rows of data.
  *
  * To use it, you ensure that your HTML has a controls block. Note that if you omit the
@@ -76,9 +76,12 @@
  * they just selected, and with stored-checkbox-state, which preserves checkbox state
  * across page-loads using local storage.
  *
- * If you do use that other file you must include it *after* this file, so that this file's
- * setup will have created the checkbox html elements (and attached its event listeners)
- * before those files attempt to work with them.
+ * It also pairs nicely with stored-checkbox-state, which preserves checkbox state in
+ * local-storage between page-loads.
+ *
+ * If you do use either or both of these other files you must include them *after* this
+ * one, so that this file's setup will have created the checkbox html elements (and
+ * attached its event listeners) before those files attempt to work with them.
  *
  */
  
