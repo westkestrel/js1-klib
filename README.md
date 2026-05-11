@@ -99,6 +99,13 @@ one, so that this file's setup will have created the checkbox html elements (and
 attached its event listeners) before those files attempt to work with them.
 
 
+### navigation-without-bookmarks.js
+
+
+Navigation Without Bookmarks allows the user to click anchor links (e.g., <a href="#foo">)
+to jump to that portion of the web page without adding the anchor to the end of the
+URL.
+
 ### radio-checkbox-group.js
 
 
