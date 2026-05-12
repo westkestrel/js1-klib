@@ -42,6 +42,10 @@
  * <p>Some people like them. Some people don't</p>
  * </section>
  * ```
+ *
+ * If you also include the *longpress.js* script then the user can long-press or
+ * Command-click (Control-click on Windows) a button to expand the section and collapse
+ * all others.  You must include the *longpress.js* script before *collapsible.js*.
  */
  
 const collapsibleBootstrap = () => {
@@ -51,21 +55,45 @@ const getLocalStorageKey = (element) => {
     return'collapse-' + element.innerHTML.replace(/<.*?>/g, '').replace(/\W+/g, '-')
 }
 
-const toggle = (event) => {
-    var container = event.target
-    var className = null
-    while (container) {
-        className = container.getAttribute('class') || ''
-        if (className.indexOf('collapsible-section') != -1) break;
-        container = container.parentNode
+const isCollapsed = (elementOrClassString) => {
+    classNames = elementOrClassString.getAttribute
+        ? elementOrClassString.getAttribute('class')
+        : elementOrClassString
+    return (classNames || '').split(' ').some(s => s == 'collapsed')
+}
+
+const toggle = (event, solo) => {
+    if (event.target.justHadLongPress) {
+        event.preventDefault
+        return true
     }
-    if (!container) {
+    
+    var targetContainer = event.target
+    var className = null
+    while (targetContainer) {
+        className = targetContainer.getAttribute('class') || ''
+        if (className.indexOf('collapsible-section') != -1) break;
+        targetContainer = targetContainer.parentNode
+    }
+    if (!targetContainer) {
         console.error('no collapsible-section found!')
         return
     }
-    const shouldCollapse = className.split(' ').indexOf('collapsed') === -1
-    const containers = event.metaKey ? document.getElementsByClassName('collapsible-section') : [container]
+    const containers = solo
+    ? Array.from(document.getElementsByClassName('collapsible-section'))
+    : [targetContainer]
+    
+    // if we are soloing, we always expand the target.  If not, we toggle
+    const shouldCollapseTarget = solo
+    ? false
+    : !isCollapsed(className)
+    
+    // if we are soloing, we collapse the others unless they were all already collapsed
+    // if we are not soloing this flag is irrelevant since we won't process any other elements
+    const shouldCollapseOthers = containers.some(e => e !== targetContainer && !isCollapsed(e))
+
     for (container of containers) {
+        const shouldCollapse = container === targetContainer ? shouldCollapseTarget : shouldCollapseOthers
         window.localStorage.setItem(getLocalStorageKey(container.firstElementChild), shouldCollapse)
         const classNames = container.getAttribute('class').split(' ').filter(s => s != 'collapsed')
         if (shouldCollapse) {
@@ -75,13 +103,18 @@ const toggle = (event) => {
     }
 }
 
+const longPress = (event) => {
+    toggle(event, true)
+}
+
 const wireUpCollapsibles = () => {
     const collapsibles = document.getElementsByClassName('collapsible-section')
     for (section of collapsibles) {
         const key = getLocalStorageKey(section.firstElementChild)
         const first = section.firstElementChild
         const target = first.getElementsByTagName('button')[0] || first
-        target.addEventListener('mouseup', toggle)
+        target.addEventListener('click', toggle)
+        target.addEventListener('longpress', longPress)
         if (window.localStorage.getItem(key) == 'true') {
             section.setAttribute('class', section.getAttribute('class') + ' collapsed')
         }
