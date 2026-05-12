@@ -2,13 +2,20 @@
 
 This project folder contains JavaScript code that is intended to be used with HTML content that is downloaded from a server, not built on the client-side using libraries like React.  Specifically, as soon as the page finishes loading the JavaScript looks for DOM elements with specific CSS class names and adds event handlers to them... so if other code on your page is going to be creating and removing DOM then the setup code in these scripts will not work properly.
 
-## Installation
+## Installation and use
 
 To use the scripts and/or stylesheets, simply copy the ones you want to use from the *dist/* folder into your own project and include them in your HTML via a `<script>` tag.  If you want to use all of the scripts, include the *klib.js* script which is simply a concatenation of all the others. If you want to use all of the stylesheets, include the *klib.css* stylesheet.
 
 ### Version numbers
 
 The first non-LICENSE comment in each script in the *dist/* folder contains a version number using the **semantic versioning** convention. These version numbers may vary from file to file; if the package was versioned but an individual file did not change then its version number will remain unchanged.
+
+### Order of Inclusion
+
+If you include *klib.js* then you will get everything you need, in the order that you need it.  If you are including specific scripts one by one, the order that you load them into your web page matters.
+
+- *filterbox.js* must come before anything else, since it creates checkboxes and inserts them into the DOM.
+- *longpress.js* must come before *radio-checkbox-group.js* and *collapsible.js*, since they both depend on the new longpress event.
 
 ## Script descriptions
 
@@ -101,6 +108,39 @@ local-storage between page-loads.
 If you do use either or both of these other files you must include them *after* this
 one, so that this file's setup will have created the checkbox html elements (and
 attached its event listeners) before those files attempt to work with them.
+
+### longpress.js
+
+
+Generate a new **longpress** event when the user holds the mouse button (or their
+finger on a touch-sensitive device) on a link, button, checkbox, or radio button.
+On a Mac the user can also Command-click the element to generate this event, and on
+Windows they can use Control-click.
+
+If you write any code that uses the new longpress event, you must register your event
+listeners in a window-load event handler, and you must register that handler *after*
+loading *longpress.js*. e.g.
+
+```html
+<head>
+<script src="longpress.js"></script>
+<script>
+window.addEventListener('load', () => {
+  document.getElementById('my-button').addEventListener('click', (event) => {
+    if (event.target.justHadLongPress) return // already handled as a long-press
+    // your standard event-handling code goes here
+  })
+  document.getElementById('my-button').addEventListener('longpress', (event) => {
+    // your long-press event-handling code goes here
+  })
+})
+</script>
+</head>
+```
+
+If you register you handlers too early then the new **justHadLongPress** flag will not
+have been added to the event target, and your code will end up performing both your
+long-press and click operations if the user Command-clicks the element.
 
 ### navigation-without-bookmarks.js
 

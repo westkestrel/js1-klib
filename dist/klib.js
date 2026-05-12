@@ -292,6 +292,35 @@ filterboxBootstrap()
 
 
 /** (version 0.3.0)
+ * Generate a new **longpress** event when the user holds the mouse button (or their
+ * finger on a touch-sensitive device) on a link, button, checkbox, or radio button.
+ * On a Mac the user can also Command-click the element to generate this event, and on
+ * Windows they can use Control-click.
+ *
+ * If you write any code that uses the new longpress event, you must register your event
+ * listeners in a window-load event handler, and you must register that handler *after*
+ * loading *longpress.js*. e.g.
+ *
+ * ```html
+ * <head>
+ * <script src="longpress.js"></script>
+ * <script>
+ * window.addEventListener('load', () => {
+ *   document.getElementById('my-button').addEventListener('click', (event) => {
+ *     if (event.target.justHadLongPress) return // already handled as a long-press
+ *     // your standard event-handling code goes here
+ *   })
+ *   document.getElementById('my-button').addEventListener('longpress', (event) => {
+ *     // your long-press event-handling code goes here
+ *   })
+ * })
+ * </script>
+ * </head>
+ * ```
+ * 
+ * If you register you handlers too early then the new **justHadLongPress** flag will not
+ * have been added to the event target, and your code will end up performing both your
+ * long-press and click operations if the user Command-clicks the element.
  */
  
 const longpressBootstrap = () => {
