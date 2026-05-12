@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Long-press events</title>
+<link rel='stylesheet' href='style.css'>
+<link rel='stylesheet' href='../dist/collapsible.css'>
+<script src="../dist/longpress.js"></script>
+</head>
+<body class="rotate-chevron-when-collapsed animate-when-collapsed">
+<h1>Long-press events</h1>
+<p>
+This HTML page demonstrates how to use the <em>longpress.js</em> script to detect when the user long-presses a UI element on your page.
+After observing the behaviour of the page, view the page source to see the JavaScript.
+</p>
+<p>
+Click, long-press, or Command-click (Control-click on Windows) this<br/>&nbsp;
+<a id="demo-link" href="#none">Link</a>
+</p>
+<p>
+Click, long-press, or Command-click (Control-click on Windows) this<br/>&nbsp;
+<button id="demo-button">Button</button>
+<button id="demo-bad-button">Bad Button</button>
+</p>
+<p>
+Check, uncheck, long-press, or Command-click this<br/>&nbsp;
+<input type="checkbox" id="demo-checkbox"/> <label for="demo-checkbox">checkbox</label>
+</p>
+<pre id="report"></pre>
+
+<hr/>
+
+<p>
+Observe that for the link and button both the long-press event <em>and</em> the usual click event is delivered.
+The script cannot reliably prevent the delivery of the event when the mouse is released,
+so your code must check if this is the click following a long-press by examining
+<code>event.target.justHadLongPress</code>. 
+</p>
+<p>
+Observe that if you Command-click on the <strong>Bad Button</strong> the code delivers a long-press event (correct) but then delivers a click event without setting the <code>justHadLongPress</code> flag (<strong>wrong!</strong>).
+This happened because the page code added its click handler before the <em>longpress.js</em> code registered its own handlers.
+You must register your event handlers within a handler of the <strong>window.load</strong> event, and must register your load-event handler <em>after</em> including the <em>longpress.js</em> code.
+</p>
+
+<script>
+function report(message) {
+    document.getElementById('report').innerHTML += message + '\n'
+}
+function longpressTrailer(event) {
+    return event.target.justHadLongPress ? ' after a long-press' : ''
+}
+function wireItUp() {
+    const a = document.getElementById('demo-link')
+    const b = document.getElementById('demo-button')
+    const cb = document.getElementById('demo-checkbox')
+    a.addEventListener('click', e => report('click on link' + longpressTrailer(e)))
+    a.addEventListener('longpress', e => report('click on link via longpress' + longpressTrailer(e)))
+    b.addEventListener('click', e => report('click on button' + longpressTrailer(e)))
+    b.addEventListener('longpress', e => report('click on button via longpress' + longpressTrailer(e)))
+    cb.addEventListener('change', e => report('checkbox changed to ' + e.target.checked + longpressTrailer(e)))
+    cb.addEventListener('longpress', e => report('checkbox changed to ' + e.target.checked + ' via longpress' + longpressTrailer(e)))
+}
+const bb = document.getElementById('demo-bad-button')
+bb.addEventListener('click', e => report('click on bad button' + longpressTrailer(e)))
+bb.addEventListener('longpress', e => report('click on bad button via longpress' + longpressTrailer(e)))
+window.addEventListener('load', wireItUp)
+</script>
+</body>
+</html>
