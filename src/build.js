@@ -14,10 +14,21 @@ import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 
 
 const ENCODING = { encoding: 'utf8' }
 
+/**
+ * Ensure that we include collapsible.js after longpress.js
+ */
+function compareFilenames(a, b) {
+    if (a.startsWith('collapsible')) a = 'z' + a
+    if (b.startsWith('collapsible')) b = 'z' + b
+    return a < b ? -1 : a > b ? 1 : 0
+}
+
 function main() {
     const omitLicense = argv.some(a => a === '--omit-license' || a === '-L')
     const version = getProjectVersion()
-    const files = readdirSync('src').filter(f => f != 'build.js' && f.indexOf('.') > 0)
+    const files = readdirSync('src')
+        .filter(f => f != 'build.js' && f.indexOf('.') > 0)
+        .sort(compareFilenames)
     const licenseLines = readFileSync('LICENSE.txt', { encoding: 'utf8' }).split('\n').map(line => `* ${line}`)
     const allJavaScript = []
     const allStyles = []
