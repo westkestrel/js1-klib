@@ -148,6 +148,7 @@ const injectCSS = () => {
     cssRules = `
         .radio-checkbox-group input,
         .radio-checkbox-group label {
+            /* Prevent iOS from opening the standard Copy menu when the user long-presses */
             -webkit-touch-callout: none !important;
             -webkit-user-select: none !important;
         }

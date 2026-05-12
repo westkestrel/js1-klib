@@ -16,6 +16,7 @@
 This HTML page demonstrates how to use the <em>longpress.js</em> script to detect when the user long-presses a UI element on your page.
 After observing the behaviour of the page, view the page source to see the JavaScript.
 </p>
+<div class="supports-longpress">
 <p>
 Click, long-press, or Command-click (Control-click on Windows) this<br/>&nbsp;
 <a id="demo-link" href="#none">Link</a>
@@ -23,12 +24,20 @@ Click, long-press, or Command-click (Control-click on Windows) this<br/>&nbsp;
 <p>
 Click, long-press, or Command-click (Control-click on Windows) this<br/>&nbsp;
 <button id="demo-button">Button</button>
-<button id="demo-bad-button">Bad Button</button>
+<button id="demo-bad-button-1">Bad Button</button>
 </p>
 <p>
 Check, uncheck, long-press, or Command-click this<br/>&nbsp;
-<input type="checkbox" id="demo-checkbox"/> <label for="demo-checkbox">checkbox</label>
+<input type="checkbox" id="demo-checkbox"/> <label for="demo-checkbox">Checkbox</label>
 </p>
+</div>
+
+<p>
+Click, long-press, or Command-click (Control-click on Windows) this<br/>&nbsp;
+<button id="demo-bad-button-2">Other Bad Button</button>
+<button id="demo-good-button" class="supports-longpress">Good Button</button>
+</p>
+
 <pre id="report"></pre>
 
 <hr/>
@@ -44,6 +53,18 @@ Observe that if you Command-click on the <strong>Bad Button</strong> the code de
 This happened because the page code added its click handler before the <em>longpress.js</em> code registered its own handlers.
 You must register your event handlers within a handler of the <strong>window.load</strong> event, and must register your load-event handler <em>after</em> including the <em>longpress.js</em> code.
 </p>
+<p>
+Observe that on iOS if you long-press the <strong>Other Bad Button</strong> the code delivers a long-press event (correct) but the system also pops up a context menu offering to copy the selected text (<strong>wrong!</strong>).
+This happened because the button is not within containing element with the class <code>supports-longpress</code>.
+The <strong>Good Button</strong> behaves correctly because the class has been added to the button itself.
+</p>
+<p>
+If you cannot (or don't want to) add the <code>supports-longpress</code> class to your HTML you will need to apply the following CSS rules to the DOM elements that you expect users to longpress on:
+<pre>
+    -webkit-touch-callout: none !important;
+    -webkit-user-select: none !important;
+</pre>
+</p>
 
 <script>
 function report(message) {
@@ -56,16 +77,22 @@ function wireItUp() {
     const a = document.getElementById('demo-link')
     const b = document.getElementById('demo-button')
     const cb = document.getElementById('demo-checkbox')
-    a.addEventListener('click', e => report('click on link' + longpressTrailer(e)))
-    a.addEventListener('longpress', e => report('click on link via longpress' + longpressTrailer(e)))
-    b.addEventListener('click', e => report('click on button' + longpressTrailer(e)))
-    b.addEventListener('longpress', e => report('click on button via longpress' + longpressTrailer(e)))
-    cb.addEventListener('change', e => report('checkbox changed to ' + e.target.checked + longpressTrailer(e)))
-    cb.addEventListener('longpress', e => report('checkbox changed to ' + e.target.checked + ' via longpress' + longpressTrailer(e)))
+    const bb2 = document.getElementById('demo-bad-button-2')
+    const gb = document.getElementById('demo-good-button')
+    a.addEventListener('click', e => report('click on Link' + longpressTrailer(e)))
+    a.addEventListener('longpress', e => report('click on Link via longpress' + longpressTrailer(e)))
+    b.addEventListener('click', e => report('click on Button' + longpressTrailer(e)))
+    b.addEventListener('longpress', e => report('click on Button via longpress' + longpressTrailer(e)))
+    bb2.addEventListener('click', e => report('click on Other Bad Button' + longpressTrailer(e)))
+    bb2.addEventListener('longpress', e => report('click on Other Bad Button via longpress' + longpressTrailer(e)))
+    gb.addEventListener('click', e => report('click on Good Button' + longpressTrailer(e)))
+    gb.addEventListener('longpress', e => report('click on Good Button via longpress' + longpressTrailer(e)))
+    cb.addEventListener('change', e => report('toggled Checkbox to ' + e.target.checked + longpressTrailer(e)))
+    cb.addEventListener('longpress', e => report('toggled Checkbox to ' + e.target.checked + ' via longpress' + longpressTrailer(e)))
 }
-const bb = document.getElementById('demo-bad-button')
-bb.addEventListener('click', e => report('click on bad button' + longpressTrailer(e)))
-bb.addEventListener('longpress', e => report('click on bad button via longpress' + longpressTrailer(e)))
+const bb1 = document.getElementById('demo-bad-button-1')
+bb1.addEventListener('click', e => report('click on bad button' + longpressTrailer(e)))
+bb1.addEventListener('longpress', e => report('click on bad button via longpress' + longpressTrailer(e)))
 window.addEventListener('load', wireItUp)
 </script>
 </body>

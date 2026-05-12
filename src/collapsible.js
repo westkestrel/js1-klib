@@ -95,6 +95,13 @@ const wireUpCollapsibles = () => {
         }
     }
     cssRules = `
+        .collapsible-section > :first-child button,
+        .collapsible-section > :first-child input,
+        .collapsible-section > :first-child label {
+            /* Prevent iOS from opening the standard Copy menu when the user long-presses */
+            -webkit-touch-callout: none !important;
+            -webkit-user-select: none !important;
+        }
         .collapsible-section.collapsed > :not(:first-child) {
             display: none;
         }

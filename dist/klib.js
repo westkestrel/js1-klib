@@ -299,7 +299,7 @@ filterboxBootstrap()
  *
  * If you write any code that uses the new longpress event, you must register your event
  * listeners in a window-load event handler, and you must register that handler *after*
- * loading *longpress.js*. e.g.
+ * loading *longpress.js*. E.g.,
  *
  * ```html
  * <head>
@@ -316,11 +316,22 @@ filterboxBootstrap()
  * })
  * </script>
  * </head>
+ * <body>
+ *   <p class="supports-longpress">
+ *     <button id="my-button">Click or long-press me</button>
+ *   </p>
+ * </body>
  * ```
  * 
  * If you register you handlers too early then the new **justHadLongPress** flag will not
  * have been added to the event target, and your code will end up performing both your
  * long-press and click operations if the user Command-clicks the element.
+ *
+ * If you intend to support longpress events on an iOS device you will probably want to
+ * prevent the system-standard Copy menu from coming up when the user long-presses. If
+ * you add the css class `supports-longpress` a container then the Copy menu will be
+ * suppressed for all links, buttons, checkboxes, and input labels within the container.
+ * You can also add the class directly to the link, button, checkbox, or label.
  */
  
 const longpressBootstrap = () => {
@@ -357,6 +368,7 @@ const longpressBootstrap = () => {
         metaKey = event.metaKey
         if (timeout) clearTimeout(timeout)
         timeout = setTimeout(longPress, 1000, event)
+        
         return false
     }
     
@@ -457,6 +469,28 @@ const longpressBootstrap = () => {
         }
     }
     
+    const injectCSS = () => {
+        cssRules = `
+            .supports-longpress a,
+            .supports-longpress button,
+            .supports-longpress input,
+            .supports-longpress label,
+            a.supports-longpress,
+            button.supports-longpress,
+            input.supports-longpress,
+            label.supports-longpress {
+                /* Prevent iOS from opening the standard Copy menu when the user long-presses */
+                -webkit-touch-callout: none !important;
+                -webkit-user-select: none !important;
+            }
+        `.replace(/\n {4,8}/g, '\n')
+        const head = document.getElementsByTagName('head')[0]
+        const style = document.createElement('style')
+        style.setAttribute('type', 'text/css')
+        style.innerHTML = cssRules
+        head.appendChild(style)
+    }
+    
     const wireUpInteractiveElements = () => {
         wireUpMouseHandlers(document.getElementsByTagName('button'))
         wireUpMouseHandlers(document.getElementsByTagName('a'))
@@ -465,6 +499,7 @@ const longpressBootstrap = () => {
         wireUpChangeHandlers(allInputs.filter(e => e.getAttribute('type') == 'checkbox'))
         wireUpChangeHandlers(allInputs.filter(e => e.getAttribute('type') == 'radio'))
         wireUpMouseHandlers(allLabels)
+        injectCSS()
     }
     
     window.addEventListener('load', wireUpInteractiveElements)
@@ -642,6 +677,7 @@ const injectCSS = () => {
     cssRules = `
         .radio-checkbox-group input,
         .radio-checkbox-group label {
+            /* Prevent iOS from opening the standard Copy menu when the user long-presses */
             -webkit-touch-callout: none !important;
             -webkit-user-select: none !important;
         }
@@ -812,6 +848,13 @@ const wireUpCollapsibles = () => {
         }
     }
     cssRules = `
+        .collapsible-section > :first-child button,
+        .collapsible-section > :first-child input,
+        .collapsible-section > :first-child label {
+            /* Prevent iOS from opening the standard Copy menu when the user long-presses */
+            -webkit-touch-callout: none !important;
+            -webkit-user-select: none !important;
+        }
         .collapsible-section.collapsed > :not(:first-child) {
             display: none;
         }
