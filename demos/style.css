@@ -8,6 +8,13 @@ body {
     line-height: 1.25em;
 }
 
+heading {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+}
+
 code {
     color: brown;
 }
