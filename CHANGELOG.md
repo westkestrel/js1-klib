@@ -1,5 +1,11 @@
 # Change Log
 
+### 0.3.1 (12-May-2026)
+
+Fix a typo in the **longpress.js** doc comments.
+
+Add a note to the **README** saying that the scripts have not been tested on Android devices.
+
 ## 0.3.0 (11-May-2026)
 
 Add
