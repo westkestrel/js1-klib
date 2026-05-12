@@ -20,8 +20,39 @@ and a <code>&lt;section class="filterbox-content"&gt;</code> containing content 
 Click the filters below to show and hide their content.
 </p>
 <p>
+The first column of controls also has the <a href="radio-checkbox-group.html">radio-checkbox-group</a> class applied,
+which is a useful enhancement to these sorts of controls.
 After you have experimented with this page, you might want to look at the <a href="filterbox-styled.html">filterbox with styling</a> demo.
 </p>
+<section>
+<h2>Controls</h2>
+<p>Press and hold (or Command-click) on a checkbox in the first column to select it and deselect all others.</p>
+<div class="horizontal-group">
+<ul class="filterbox-controls filter-dermis radio-checkbox-group">
+<li><input type="checkbox"><label>Fur</label></li>
+<li><input type="checkbox"><label>Feathers</label></li>
+<li><input type="checkbox"><label>Scales</label></li>
+</ul>
+<ul class="filterbox-controls filter-legs">
+<li><input type="checkbox"><label>4 legs</label></li>
+<li><input type="checkbox"><label>2 legs</label></li>
+<li><input type="checkbox" id="no-legs"><label>0 legs</label></li>
+</ul>
+</div>
+</section>
+<section class="filterbox-data filter-dermis filter-legs">
+<h2>Content</h2>
+<p class="fur four-legs">Cat</p>
+<p class="fur four-legs">Rat</p>
+<p class="fur four-legs">Dog</p>
+<p class="fur two-legs">Gorilla</p>
+<p class="feathers two-legs">Eagle</p>
+<p class="feathers two-legs">Crow</p>
+<p class="feathers scales two-legs">Psittacosaurus</p>
+<p class="scales no-legs">Cobra</p>
+<p class="scales four-legs">Komodo Dragon</p>
+</section>
+<hr/>
 <p>
 Things to observe when you inspect the page elements as you interact with the page:
 <ul>
@@ -53,33 +84,5 @@ it makes the first column much more usable than the second column.
 </li>
 </ul>
 </p>
-<section>
-<h2>Controls</h2>
-<p>Press and hold (or Command-click) on a checkbox in the first column to select it and deselect all others.</p>
-<div class="horizontal-group">
-<ul class="filterbox-controls filter-dermis radio-checkbox-group">
-<li><input type="checkbox"><label>Fur</label></li>
-<li><input type="checkbox"><label>Feathers</label></li>
-<li><input type="checkbox"><label>Scales</label></li>
-</ul>
-<ul class="filterbox-controls filter-legs">
-<li><input type="checkbox"><label>4 legs</label></li>
-<li><input type="checkbox"><label>2 legs</label></li>
-<li><input type="checkbox" id="no-legs"><label>0 legs</label></li>
-</ul>
-</div>
-</section>
-<section class="filterbox-data filter-dermis filter-legs">
-<h2>Content</h2>
-<p class="fur four-legs">Cat</p>
-<p class="fur four-legs">Rat</p>
-<p class="fur four-legs">Dog</p>
-<p class="fur two-legs">Gorilla</p>
-<p class="feathers two-legs">Eagle</p>
-<p class="feathers two-legs">Crow</p>
-<p class="feathers scales two-legs">Psittacosaurus</p>
-<p class="scales no-legs">Cobra</p>
-<p class="scales four-legs">Komodo Dragon</p>
-</section>
 <body>
 </html>
