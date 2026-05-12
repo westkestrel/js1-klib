@@ -110,7 +110,8 @@ URL.
 
 
 Radio Checkbox Groups allow you to have checkboxes which behave like radio buttons
-when Command-clicked or long-pressed.
+when Command-clicked or long-pressed. This is *not* a standalone script; if you include
+it you must first include *longpress.js*.
 
 To use it, add the class 'radio-checkbox-group' to a container.  Now any checkboxes
 within the container will behave normally when toggled, unless the Command key (on

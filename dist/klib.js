@@ -570,7 +570,8 @@ navigationWithoutBookmarksBootstrap()
 
 /** (version 0.3.0)
  * Radio Checkbox Groups allow you to have checkboxes which behave like radio buttons
- * when Command-clicked or long-pressed.
+ * when Command-clicked or long-pressed. This is *not* a standalone script; if you include
+ * it you must first include *longpress.js*.
  *
  * To use it, add the class 'radio-checkbox-group' to a container.  Now any checkboxes
  * within the container will behave normally when toggled, unless the Command key (on
@@ -614,21 +615,6 @@ const wireUpCheckboxes = (checkboxes, labels) => {
     }
     
     /**
-     * Returns the checkbox associated with the given element, which may be
-     * - a checkbox
-     * - a label with a 'for' attribute
-     * - a child of such a label
-     *
-     * Returns null if no such checkbox can be found.
-     */
-    const getAssociatedCheckbox = element => {
-        if (!element) return null;
-        if (element.tagName === 'INPUT' && element.getAttribute('type') === 'checkbox') return element;
-        const id = getCheckboxId(element)
-        return id && document.getElementById(id)
-    }
-    
-    /**
      * Returns true iff any checkbox other than the given target is currently checked.
      */
     const isAnyOtherCheckboxChecked = target => {
@@ -669,75 +655,6 @@ const wireUpCheckboxes = (checkboxes, labels) => {
     }
     
     /**
-     * Event handler for mousedown or touchstart events on either checkboxes or their labels.
-     *
-     * Clears any outstanding long-press timers and starts a new one.
-     */
-    const hit = event => {
-        metaKey = event.metaKey
-        justPerformedLongPress = false
-        if (timeout) clearTimeout(timeout)
-        timeout = setTimeout(longPress, 1000, event)
-        return false
-    }
-    
-    /**
-     * Event handler for mouseup or touchend events on either checkboxes or their labels.
-     *
-     * Clears any outstanding long-press timers to prevent the long-press action from occurring.
-     */
-    const release = event => {
-        metaKey = event.metaKey
-        if (timeout) {
-            clearTimeout(timeout)
-            timeout = null
-        }
-        
-        // command-clicking is the same as a long-press
-        if (event.metaKey && !justPerformedLongPress) {
-            longPress(event)
-        }
-        
-        // This gets a bit tricky... If the user long-pressed on a checkbox then we will
-        // have soloed (or de-soloed) the checkboxes when the long-press timer went off.
-        // But then the user releases the mouse button or lifts their finger and the
-        // built-in checkbox toggling occurs and deselects the target.
-        // We want to prevent this so the target remains selected, but it appears that
-        // event.preventDefault() on the mouseup event does not prevent the change event
-        // from occurring... so we need to take a different approach.
-        if (justPerformedLongPress) {
-            const checkbox = getAssociatedCheckbox(event.target)
-            const wasChecked = checkbox.checked
-            
-            // On macOS we can simply toggle the checkbox manually (to un-checked) and then
-            // when the built-in checkbox-toggling code executes it will be set to checked
-            // and the event handlers will fire. That second firing is unnecessary, but
-            // harmless since the checkbox state is correct.
-            if (checkbox) {
-                checkbox.checked = !wasChecked
-            } else {
-                console.error('Could not find a checkbox associated with event', event)
-            }
-            
-            // Unfortunately, the above pre-toggling does NOT work on iOS, so instead
-            // we need to wait until the change event has propagated and then change it
-            // back. This is unfortunate because any logic associated with toggling the
-            // checkbox will fire twice (once with checked==false and then again with
-            // checked=true), but it seems to happen before the screen redraws so there
-            // is no visible flicker.
-            setTimeout(() => {
-                if (checkbox.checked != wasChecked) {
-                    checkbox.checked = wasChecked;
-                    const event = new Event('change')
-                    event.target = checkbox
-                    checkbox.dispatchEvent(event)
-                }
-            }, 0)
-        }
-        return false
-    }
-    
-    /**
      * Pseudo-event handler for long-presses on checkboxes or their labels.
      *
      * Looks to see if any other checkboxes are checked and if so, solos the target checkbox.
@@ -765,16 +682,7 @@ const wireUpCheckboxes = (checkboxes, labels) => {
     }
     
     for (checkbox of checkboxes) {
-        checkbox.addEventListener('mousedown', hit)
-        checkbox.addEventListener('mouseup', release)
-        checkbox.addEventListener('touchstart', hit)
-        checkbox.addEventListener('touchend', release)
-    }
-    for (label of labels) {
-        label.addEventListener('mousedown', hit)
-        label.addEventListener('mouseup', release)
-        label.addEventListener('touchstart', hit)
-        label.addEventListener('touchend', release)
+        checkbox.addEventListener('longpress', longPress)
     }
 }
 
