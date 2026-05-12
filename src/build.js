@@ -2,13 +2,20 @@
 /**
  * This build script creates the distribution package; it is not itself included
  * in the distribution.
+ *
+ * You can pass the --omit-license flag to leave off the LICENSE text from the files as
+ * they are copied to the *dist/* folder.  This is useful when doing development as it
+ * means that the line numbers reported in any exceptions thrown by the demo code will
+ * correctly refer to lines in the source files.
  */
 
+import { argv } from 'process'
 import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'fs'
 
 const ENCODING = { encoding: 'utf8' }
 
 function main() {
+    const omitLicense = argv.some(a => a === '--omit-license' || a === '-L')
     const version = getProjectVersion()
     const files = readdirSync('src').filter(f => f != 'build.js' && f.indexOf('.') > 0)
     const licenseLines = readFileSync('LICENSE.txt', { encoding: 'utf8' }).split('\n').map(line => `* ${line}`)
@@ -19,9 +26,11 @@ function main() {
     licenseLines.push('*/')
     licenseLines.push('')
     licenseLines.push('')
-    const license = licenseLines.join('\n')
-    allJavaScript.push(license)
-    allStyles.push(license)
+    const licenseForConcatenatedFile = licenseLines.join('\n')
+    const licenseForIndividualFile = omitLicense ? '' : licenseForConcatenatedFile
+    allJavaScript.push(licenseForConcatenatedFile)
+    allStyles.push(licenseForConcatenatedFile)
+    if (omitLicense) console.log('omitting LICENSE text from individual files')
     if (!existsSync('dist')) {
         console.log(`mkdir dist`)
         mkdirSync('dist')
@@ -34,7 +43,7 @@ function main() {
         helpContent[file.toLowerCase()] = extractHelpContent(content)
         if (file.endsWith('.js')) allJavaScript.push(versionedContent)
         if (file.endsWith('.css')) allStyles.push(versionedContent)
-        writeIfChanged(dst, license + versionedContent)
+        writeIfChanged(dst, licenseForIndividualFile + versionedContent)
     }
     
     const javaScriptDst = `dist/klib.js`
