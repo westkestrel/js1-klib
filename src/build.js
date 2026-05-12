@@ -90,6 +90,8 @@ function extractHelpContent(content) {
 function updateReadmeBlock(block, helpContent) {
     const nameMatches = block.match(/^[\w.-]+/)
     if (!nameMatches) return block
+    const potentialTail = block.replace(/[\s\S]*?\n#/, '\n#')
+    const tail = potentialTail.length == block.length ? '' : potentialTail
     const name = nameMatches[0]
     const key = name.toLowerCase()
     const help = helpContent[key] || helpContent[name] || helpContent[name.toLowerCase()]
@@ -98,7 +100,7 @@ function updateReadmeBlock(block, helpContent) {
         return block
     }
     console.log(`...for ${name}`)
-    return `${name}\n\n${help}\n`
+    return `${name}\n\n${help}${tail}`.trim() + '\n\n'
 }
 
 function writeIfChanged(path, content) {

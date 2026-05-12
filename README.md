@@ -102,7 +102,6 @@ If you do use either or both of these other files you must include them *after* 
 one, so that this file's setup will have created the checkbox html elements (and
 attached its event listeners) before those files attempt to work with them.
 
-
 ### navigation-without-bookmarks.js
 
 
@@ -141,6 +140,8 @@ Stored Checkbox State preserves checkbox state between webpage reloads.
 
 If you decorate a container with `class="stored-checkbox-state"` then any checkboxes
 within it will have their state preserved in local storage between launches.
+
+## Stylesheets
 
 ### collapsible.css
 
