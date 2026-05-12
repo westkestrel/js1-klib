@@ -80,9 +80,14 @@ const wireUpCheckboxes = (checkboxes, labels) => {
     
     /**
      * Sets the state of the checkbox and dispatches a change event.
+     *
+     * As an optimization, we can bypass dispatching the event if the checkbox is already
+     * in the desired state.  We must not perform this bypass if the checkbox in question
+     * was the event target, though, since it will have just changed state and we *do*
+     * want to dispatch the change event.
      */
-    const setChecked = (checkbox, flag) => {
-        if (checkbox.checked == flag) return
+    const setChecked = (checkbox, flag, eventTargetCheckbox) => {
+        if (checkbox.checked == flag && checkbox !== eventTargetCheckbox) return
         checkbox.checked = flag
         const event = new Event('change')
         event.target = checkbox
@@ -94,7 +99,7 @@ const wireUpCheckboxes = (checkboxes, labels) => {
      */
     const solo = target => {
         for (checkbox of checkboxes) {
-            setChecked(checkbox, target === checkbox)
+            setChecked(checkbox, target === checkbox, target)
         }
     }
     
