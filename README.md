@@ -149,7 +149,7 @@ long-press and click operations if the user Command-clicks the element.
 
 If you intend to support longpress events on an iOS device you will probably want to
 prevent the system-standard Copy menu from coming up when the user long-presses. If
-you add the css class `supports-longpress` a container then the Copy menu will be
+you add the css class `supports-longpress` to a container then the Copy menu will be
 suppressed for all links, buttons, checkboxes, and input labels within the container.
 You can also add the class directly to the link, button, checkbox, or label.
 
