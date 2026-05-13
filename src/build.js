@@ -220,7 +220,7 @@ function updateScriptDocs(helpContent) {
     if (!existsSync('docs/scripts')) mkdirSync('docs/scripts')
     for (const key of Object.keys(helpContent).sort().filter(s => s.endsWith('.js'))) {
         const docPath = `docs/scripts/${key}.md`
-        writeMarkdown(docPath, `# ${key}\n\n${helpContent[key]}\n\n[[Back](.)]`)
+        writeMarkdown(docPath, `# ${key}\n\n${helpContent[key]}\n\n[[Back](..)]`)
     }
 }
 
@@ -228,7 +228,7 @@ function updateStylesheetDocs(helpContent) {
     if (!existsSync('docs/stylesheets')) mkdirSync('docs/stylesheets')
     for (const key of Object.keys(helpContent).sort().filter(s => s.endsWith('.css'))) {
         const docPath = `docs/stylesheets/${key}.md`
-        writeMarkdown(docPath, `# ${key}\n\n${helpContent[key]}\n\n[[Back](.)]`)
+        writeMarkdown(docPath, `# ${key}\n\n${helpContent[key]}\n\n[[Back](..)]`)
     }
 }
 
