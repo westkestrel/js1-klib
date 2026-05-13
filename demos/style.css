@@ -40,6 +40,16 @@ pre {
     color: purple;
 }
 
+footer {
+    color: gray;
+    font-size: smaller;
+    margin-top: 5em;
+    text-align: right;
+}
+footer a {
+    color: inherit;
+}
+
 .explanation {
     font-size: larger;
 }

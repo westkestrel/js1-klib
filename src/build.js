@@ -12,8 +12,33 @@
 import { argv } from 'process'
 import { copyFileSync, existsSync, globSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'fs'
 import { basename } from 'path'
+import { parse } from 'marked'
 
 const ENCODING = { encoding: 'utf8' }
+const CONVERT_MARKDOWN = true // convert Markdown files to HTML
+const HTML_STYLE = readFileSync('demos/style.css', ENCODING)
+const HTML_PREAMBLE = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TITLE</title>
+<style type="text/css">
+${HTML_STYLE}
+</style>
+</head>
+<body>
+`
+const COPYRIGHT_YEAR = new Date().toISOString().substring(0, 4)
+const HTML_POSTAMBLE = `
+<footer>
+This page is part of the <a href="https://westkestrel.github.io/js1-klib/">js1-klib documentation</a> and is 
+&copy; ${COPYRIGHT_YEAR} under the terms of the <a href="https://github.com/westkestrel/js1-klib#MIT-1-ov-file">MIT License</a>
+</footer>
+</body>
+</html>
+`
 
 /**
  * Ensure that we include collapsible.js after longpress.js
@@ -65,9 +90,8 @@ function main() {
     writeDistribution(styleDst, allStyles.join('\n\n'))
 
     var readmeBlocks = readFileSync('README.md', ENCODING).split(/^### /m)
-    console.log('updating README.md')
     var readmeContent = readmeBlocks.map(b => updateReadmeBlock(b, helpContent)).join('### ')
-    writeMarkdown('README.md', readmeContent)
+    writeMarkdown('README.md', readmeContent, 'Markdown')
     
     updateDocs(helpContent)
 }
@@ -113,12 +137,23 @@ function writeDistribution(path, content) {
     writeFileSync(path, content, ENCODING)
 }
 
-function writeMarkdown(path, content) {
+function writeMarkdown(path, content, forcedType) {
+    if (CONVERT_MARKDOWN && forcedType != 'Markdown') {
+        const titleMatch = content.match(/^# (.*)/m)
+        const title = titleMatch ? titleMatch[1] : basename(path).replace('.md', '')
+        content = HTML_PREAMBLE.replace('TITLE', title) + parse(content) + HTML_POSTAMBLE
+        path = path.replace('.md', '.html')
+    }
     console.log(`updating ${path}`)
     writeFileSync(path, content, ENCODING)
 }
 
 function writeDemo(path, content) {
+    content = content.replaceAll('../dist/', 'lib/')
+            .replaceAll('href="."', 'href=".."')
+            .replaceAll("href='.'", 'href=".."')
+            .replaceAll("Back to demo list", 'Back to docs')
+            .replace(/<\/body>[\S\s]+/, HTML_POSTAMBLE)
     console.log(`updating ${path}`)
     writeFileSync(path, content, ENCODING)
 }
@@ -137,6 +172,7 @@ function hasMeaningfulChanges(oldContent, newContent) {
 }
 
 function updateDocs(helpContent) {
+    if (!existsSync('docs')) mkdirSync('docs')
     updateDocsIndex(helpContent)
     updateScriptDocs(helpContent)
     updateStylesheetDocs(helpContent)
@@ -198,10 +234,6 @@ function updateDocDemos() {
     if (!existsSync('docs/demos/lib')) mkdirSync('docs/demos/lib')
     for (const srcPath of globSync('demos/*').sort()) {
         const content = readFileSync(srcPath, ENCODING)
-            .replaceAll('../dist/', 'lib/')
-            .replaceAll('href="."', 'href=".."')
-            .replaceAll("href='.'", 'href=".."')
-            .replaceAll("Back to demo list", 'Back to docs')
         const dstPath = `docs/demos/${basename(srcPath)}`
         const relPath = `../../../${dstPath}`
         writeDemo(dstPath, content)
