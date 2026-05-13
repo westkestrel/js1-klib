@@ -1,0 +1,118 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>collapsible.css</title>
+<style type="text/css">
+body {
+    font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Constantia, Georgia, serif !important;
+    max-width: 7in;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5in;
+    padding: 1em;
+    line-height: 1.25em;
+}
+
+heading {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+}
+
+code {
+    color: brown;
+}
+
+h2,p {
+    margin-bottom: 0;
+}
+
+td {
+    padding-bottom: 1em;
+}
+
+li {
+    list-style-type: none;
+    margin-bottom: 0.5em;
+}
+
+input[type="checkbox"] {
+    margin-right: 0.5em;
+}
+
+pre {
+    color: purple;
+}
+
+footer {
+    color: gray;
+    font-size: smaller;
+    margin-top: 5em;
+    text-align: right;
+}
+footer a {
+    color: inherit;
+}
+
+.explanation {
+    font-size: larger;
+}
+.horizontal-group {
+    display: flex;
+    flex-direction: row;
+}
+
+/* rules to put the footer at the bottom of the page */
+
+body {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+footer {
+    flex-grow: 1000;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+footer .line-above {
+    display: inline-block;
+    border-top: 1px solid lightgray;
+    padding-top: 0.5em;
+    margin-bottom: 1em;
+}
+</style>
+</head>
+<body>
+<h1>collapsible.css</h1>
+<p>Styling rules for use with the <em>collapsible.js</em> script. You can use these styles, or
+can disregard them and do your own styling; the script works correctly in either case.</p>
+<p>To use these styles, add the following CSS class names to an ancestor element of
+your collapsible sections (e.g., the <code>body</code> tag).</p>
+<ul>
+<li><strong>(no class required)</strong>: buttons in collapse-control element (the first child of the element with the collapsible-section class) are styled like ordinary content.</li>
+<li><strong>dim-when-collapsed</strong>: the collapse-control element is rendered semi-transparent when the content is collapsed.</li>
+<li><strong>line-through-when-collapsed</strong>: the collapse-control element has a line drawn through it when the content is collapsed. This can be combined with dimming.</li>
+<li><strong>rotate-chevron-when-collapsed</strong>: the collapse-control element is prefixed with a downward-pointing triangle, which is rotated to point to the right when the content is collapsed.</li>
+<li><strong>animate-when-collapsed</strong>: the collapsing content shrinks to nothing rather than simply disappearing. Note that this does not behave correctly if the collapsing content consists of table rows, as table rows do not honour min-height.</li>
+</ul>
+<p>[<a href=".">Back</a>]</p>
+
+<footer>
+<div>
+<div class="line-above">
+This page is part of the <a href="https://westkestrel.github.io/js1-klib/">js1-klib documentation</a> and is 
+&copy; 2026 under the terms of the <a href="https://github.com/westkestrel/js1-klib#MIT-1-ov-file">MIT License</a>
+</div>
+</div>
+</footer>
+</body>
+</html>

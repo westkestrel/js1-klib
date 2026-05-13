@@ -38,13 +38,13 @@
  *
  * ```html
  * <ul class="filterbox-controls filter-animals">
- * <li><input type="checkbox" id="cats"><label for="cats">Felines</label></li>
- * <li><input type="checkbox"><label>Dogs</label></li>
- * <li><input type="checkbox"><label>Bugs: six-legged beasties</label></li>
- * <li><input type="checkbox"><label>Bugs (six-legged beasties)</label></li>
- * <li><input type="checkbox"><label>8-Legs (arachnids and octopi)</label></li>
- * <li><input type="checkbox"><label>Birds and Bees</label></li>
- * <li><input type="checkbox"><label>Birds, Bees</label></li>
+ *   <li><input type="checkbox" id="cats"><label for="cats">Felines</label></li>
+ *   <li><input type="checkbox"><label>Dogs</label></li>
+ *   <li><input type="checkbox"><label>Bugs: six-legged beasties</label></li>
+ *   <li><input type="checkbox"><label>Bugs (six-legged beasties)</label></li>
+ *   <li><input type="checkbox"><label>8-Legs (arachnids and octopi)</label></li>
+ *   <li><input type="checkbox"><label>Birds and Bees</label></li>
+ *   <li><input type="checkbox"><label>Birds, Bees</label></li>
  * </ul>
  * ```
  *
@@ -52,15 +52,14 @@
  *
  * ```html
  * <table class="filterbox-data filter-animals">
- * <th>...</th>
- * <tr class="cats">...</tr>
- * <tr class="cats">...</tr>
- * <tr class="dogs">...</tr>
- * <tr class="bugs">...</tr>
- * <tr class="eight-legs">...</tr>
- * <tr class="birds">...</tr>
- * <tr class="bees">...</tr>
- * <tr class="birds-and-bees">...</tr>
+ *   <tr class="cats">...</tr>
+ *   <tr class="cats">...</tr>
+ *   <tr class="dogs">...</tr>
+ *   <tr class="bugs">...</tr>
+ *   <tr class="eight-legs">...</tr>
+ *   <tr class="birds">...</tr>
+ *   <tr class="bees">...</tr>
+ *   <tr class="birds-and-bees">...</tr>
  * </table>
  * ```
  *

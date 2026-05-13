@@ -1,0 +1,142 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>longpress.js</title>
+<style type="text/css">
+body {
+    font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Constantia, Georgia, serif !important;
+    max-width: 7in;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5in;
+    padding: 1em;
+    line-height: 1.25em;
+}
+
+heading {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+}
+
+code {
+    color: brown;
+}
+
+h2,p {
+    margin-bottom: 0;
+}
+
+td {
+    padding-bottom: 1em;
+}
+
+li {
+    list-style-type: none;
+    margin-bottom: 0.5em;
+}
+
+input[type="checkbox"] {
+    margin-right: 0.5em;
+}
+
+pre {
+    color: purple;
+}
+
+footer {
+    color: gray;
+    font-size: smaller;
+    margin-top: 5em;
+    text-align: right;
+}
+footer a {
+    color: inherit;
+}
+
+.explanation {
+    font-size: larger;
+}
+.horizontal-group {
+    display: flex;
+    flex-direction: row;
+}
+
+/* rules to put the footer at the bottom of the page */
+
+body {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+footer {
+    flex-grow: 1000;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+footer .line-above {
+    display: inline-block;
+    border-top: 1px solid lightgray;
+    padding-top: 0.5em;
+    margin-bottom: 1em;
+}
+</style>
+</head>
+<body>
+<h1>longpress.js</h1>
+<p>Generate a new <strong>longpress</strong> event when the user holds the mouse button (or their
+finger on a touch-sensitive device) on a link, button, checkbox, or radio button.
+On a Mac the user can also Command-click the element to generate this event, and on
+Windows they can use Control-click.</p>
+<p>If you write any code that uses the new longpress event, you must register your event
+listeners in a window-load event handler, and you must register that handler <em>after</em>
+loading <em>longpress.js</em>. E.g.,</p>
+<pre><code class="language-html">&lt;head&gt;
+&lt;script src=&quot;longpress.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+window.addEventListener(&#39;load&#39;, () =&gt; {
+  document.getElementById(&#39;my-button&#39;).addEventListener(&#39;click&#39;, (event) =&gt; {
+    if (event.target.justHadLongPress) return // already handled as a long-press
+    // your standard event-handling code goes here
+  })
+  document.getElementById(&#39;my-button&#39;).addEventListener(&#39;longpress&#39;, (event) =&gt; {
+    // your long-press event-handling code goes here
+  })
+})
+&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;p class=&quot;supports-longpress&quot;&gt;
+    &lt;button id=&quot;my-button&quot;&gt;Click or long-press me&lt;/button&gt;
+  &lt;/p&gt;
+&lt;/body&gt;
+</code></pre>
+<p>If you register you handlers too early then the new <strong>justHadLongPress</strong> flag will not
+have been added to the event target, and your code will end up performing both your
+long-press and click operations if the user Command-clicks the element.</p>
+<p>If you intend to support longpress events on an iOS device you will probably want to
+prevent the system-standard Copy menu from coming up when the user long-presses. If
+you add the css class <code>supports-longpress</code> to a container then the Copy menu will be
+suppressed for all links, buttons, checkboxes, and input labels within the container.
+You can also add the class directly to the link, button, checkbox, or label.</p>
+<p>[<a href=".">Back</a>]</p>
+
+<footer>
+<div>
+<div class="line-above">
+This page is part of the <a href="https://westkestrel.github.io/js1-klib/">js1-klib documentation</a> and is 
+&copy; 2026 under the terms of the <a href="https://github.com/westkestrel/js1-klib#MIT-1-ov-file">MIT License</a>
+</div>
+</div>
+</footer>
+</body>
+</html>

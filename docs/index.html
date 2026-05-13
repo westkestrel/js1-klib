@@ -1,0 +1,155 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scripts to enhance web-1.0 pages</title>
+<style type="text/css">
+body {
+    font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Constantia, Georgia, serif !important;
+    max-width: 7in;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5in;
+    padding: 1em;
+    line-height: 1.25em;
+}
+
+heading {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+}
+
+code {
+    color: brown;
+}
+
+h2,p {
+    margin-bottom: 0;
+}
+
+td {
+    padding-bottom: 1em;
+}
+
+li {
+    list-style-type: none;
+    margin-bottom: 0.5em;
+}
+
+input[type="checkbox"] {
+    margin-right: 0.5em;
+}
+
+pre {
+    color: purple;
+}
+
+footer {
+    color: gray;
+    font-size: smaller;
+    margin-top: 5em;
+    text-align: right;
+}
+footer a {
+    color: inherit;
+}
+
+.explanation {
+    font-size: larger;
+}
+.horizontal-group {
+    display: flex;
+    flex-direction: row;
+}
+
+/* rules to put the footer at the bottom of the page */
+
+body {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+footer {
+    flex-grow: 1000;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+footer .line-above {
+    display: inline-block;
+    border-top: 1px solid lightgray;
+    padding-top: 0.5em;
+    margin-bottom: 1em;
+}
+</style>
+</head>
+<body>
+<h1>Scripts to enhance web-1.0 pages</h1>
+<p>This library contains JavaScript code that is intended to be used with HTML content that is downloaded from a server, not built on the client-side using libraries like React.  Specifically, as soon as the page finishes loading the JavaScript looks for DOM elements with specific CSS class names and adds event handlers to them... so if other code on your page is going to be creating and removing DOM then the setup code in these scripts will not work properly.</p>
+<p>Note that these scripts are fine for personal projects but they are ⚠️<strong>not production-ready</strong>⚠️. In particular, they have not been tested on Android devices.</p>
+<h2>Installation and use</h2>
+<p>To use the scripts and/or stylesheets, simply copy the ones you want to use from the <em>dist/</em> folder into your own project and include them in your HTML via a <code>&lt;script&gt;</code> tag.  If you want to use all of the scripts, include the <em>klib.js</em> script which is simply a concatenation of all the others. If you want to use all of the stylesheets, include the <em>klib.css</em> stylesheet.</p>
+<h3>Version numbers</h3>
+<p>The first non-LICENSE comment in each script in the <em>dist/</em> folder contains a version number using the <strong>semantic versioning</strong> convention. These version numbers may vary from file to file; if the package was versioned but an individual file did not change then its version number will remain unchanged.</p>
+<h3>Order of Inclusion</h3>
+<p>If you include <em>klib.js</em> then you will get everything you need, in the order that you need it.  If you are including specific scripts one by one, the order that you load them into your web page matters.</p>
+<ul>
+<li><em>filterbox.js</em> must come before anything else, since it creates checkboxes and inserts them into the DOM.</li>
+<li><em>longpress.js</em> must come before <em>radio-checkbox-group.js</em> and <em>collapsible.js</em>, since they both depend on the new longpress event.</li>
+</ul>
+<h2>Script Documentation</h2>
+<ul>
+<li><a href="scripts/collapsible.js.html">collapsible.js</a><ul>
+<li><a href="demos/collapsible-sections.html">Demo: Collapsible SECTION tags</a></li>
+<li><a href="demos/collapsible-tables.html">Demo: Collapsible TBODY tags</a></li>
+<li><a href="demos/collapsible-animation.html">Demo: Animating the collapse/expand effect</a></li>
+</ul>
+</li>
+<li><a href="scripts/filterbox.js.html">filterbox.js</a><ul>
+<li><a href="demos/filterbox-unstyled.html">Demo: Filtering content tags</a></li>
+<li><a href="demos/filterbox-styled.html">Demo: Filtering content tags, with styling</a></li>
+</ul>
+</li>
+<li><a href="scripts/longpress.js.html">longpress.js</a><ul>
+<li><a href="demos/longpress.html">Demo: Detecting long-press and Command-click gestures</a></li>
+</ul>
+</li>
+<li><a href="scripts/navigation-without-bookmarks.js.html">navigation-without-bookmarks.js</a><ul>
+<li><a href="demos/navigation-without-bookmarks.html">Demo: Navigate within a page without pushing anchor tags to the location.</a></li>
+</ul>
+</li>
+<li><a href="scripts/radio-checkbox-group.js.html">radio-checkbox-group.js</a><ul>
+<li><a href="demos/radio-checkbox-group.html">Demo: Treating checkboxes like radio buttons</a></li>
+</ul>
+</li>
+<li><a href="scripts/stored-checkbox-state.js.html">stored-checkbox-state.js</a><ul>
+<li><a href="demos/stored-checkbox-state.html">Demo: Caching checkbox state in local-storage between page-loads.</a></li>
+</ul>
+</li>
+</ul>
+<h2>Stylesheet Documentation</h2>
+<ul>
+<li><a href="stylesheets/collapsible.css.html">collapsible.css</a></li>
+<li><a href="stylesheets/hide-checkboxes-and-dim-labels.css.html">hide-checkboxes-and-dim-labels.css</a></li>
+<li><a href="stylesheets/hide-checkboxes-and-line-through-labels.css.html">hide-checkboxes-and-line-through-labels.css</a></li>
+<li><a href="stylesheets/hide-checkboxes-and-use-disclosures.css.html">hide-checkboxes-and-use-disclosures.css</a></li>
+</ul>
+
+<footer>
+<div>
+<div class="line-above">
+This page is part of the <a href="https://westkestrel.github.io/js1-klib/">js1-klib documentation</a> and is 
+&copy; 2026 under the terms of the <a href="https://github.com/westkestrel/js1-klib#MIT-1-ov-file">MIT License</a>
+</div>
+</div>
+</footer>
+</body>
+</html>

@@ -37,9 +37,9 @@ practice for it to do so as this helps with the accessibility of your web page.
 e.g.,
 ```html
 <section class="collapsible-section">
-<h2><button>Rutabagas</button></h2>
-<p>Rutabagas are a vegetable.</p>
-<p>Some people like them. Some people don't</p>
+  <h2><button>Rutabagas</button></h2>
+  <p>Rutabagas are a vegetable.</p>
+  <p>Some people like them. Some people don't</p>
 </section>
 ```
 
@@ -66,13 +66,13 @@ label contents.  In the code below
 
 ```html
 <ul class="filterbox-controls filter-animals">
-<li><input type="checkbox" id="cats"><label for="cats">Felines</label></li>
-<li><input type="checkbox"><label>Dogs</label></li>
-<li><input type="checkbox"><label>Bugs: six-legged beasties</label></li>
-<li><input type="checkbox"><label>Bugs (six-legged beasties)</label></li>
-<li><input type="checkbox"><label>8-Legs (arachnids and octopi)</label></li>
-<li><input type="checkbox"><label>Birds and Bees</label></li>
-<li><input type="checkbox"><label>Birds, Bees</label></li>
+  <li><input type="checkbox" id="cats"><label for="cats">Felines</label></li>
+  <li><input type="checkbox"><label>Dogs</label></li>
+  <li><input type="checkbox"><label>Bugs: six-legged beasties</label></li>
+  <li><input type="checkbox"><label>Bugs (six-legged beasties)</label></li>
+  <li><input type="checkbox"><label>8-Legs (arachnids and octopi)</label></li>
+  <li><input type="checkbox"><label>Birds and Bees</label></li>
+  <li><input type="checkbox"><label>Birds, Bees</label></li>
 </ul>
 ```
 
@@ -80,15 +80,14 @@ Your HTML also must have a data block:
 
 ```html
 <table class="filterbox-data filter-animals">
-<th>...</th>
-<tr class="cats">...</tr>
-<tr class="cats">...</tr>
-<tr class="dogs">...</tr>
-<tr class="bugs">...</tr>
-<tr class="eight-legs">...</tr>
-<tr class="birds">...</tr>
-<tr class="bees">...</tr>
-<tr class="birds-and-bees">...</tr>
+  <tr class="cats">...</tr>
+  <tr class="cats">...</tr>
+  <tr class="dogs">...</tr>
+  <tr class="bugs">...</tr>
+  <tr class="eight-legs">...</tr>
+  <tr class="birds">...</tr>
+  <tr class="bees">...</tr>
+  <tr class="birds-and-bees">...</tr>
 </table>
 ```
 
@@ -158,8 +157,9 @@ You can also add the class directly to the link, button, checkbox, or label.
 ### navigation-without-bookmarks.js
 
 
-Navigation Without Bookmarks allows the user to click anchor links (e.g., <a href="#foo">)
-to jump to that portion of the web page without adding the anchor to the end of the
+If you add `class="navigation-without-bookmarks"` to an HTML container (e.g., a `div`
+or `section`) then any anchor links within that container (e.g., `<a href="#anchor">`)
+will jump to that portion of the web page without adding the anchor to the end of the
 URL.
 
 ### radio-checkbox-group.js
@@ -169,9 +169,9 @@ Radio Checkbox Groups allow you to have checkboxes which behave like radio butto
 when Command-clicked or long-pressed. This is *not* a standalone script; if you include
 it you must first include *longpress.js*.
 
-To use it, add the class 'radio-checkbox-group' to a container.  Now any checkboxes
+To use it, add `class="radio-checkbox-group"` to a container.  Now any checkboxes
 within the container will behave normally when toggled, unless the Command key (on
-a mac) or Control key (on Windows) is held, or if the checkbox is long-pressed on a
+a Mac) or Control key (on Windows) is held, or if the checkbox is long-pressed on a
 phone or tablet or long-clicked on computer.  Any of these gestures will trigger the
 radio-checkbox-group behavior.
 
@@ -204,19 +204,21 @@ can disregard them and do your own styling; the script works correctly in either
 
 To use these styles, add the following CSS class names to an ancestor element of
 your collapsible sections (e.g., the `body` tag).
-- (no class required): buttons in collapse-control element (the first child of the element with the collapsible-section class) are styled like ordinary content.
-- dim-when-collapsed: the collapse-control element is rendered semi-transparent when the content is collapsed.
-- line-through-when-collapsed: the collapse-control element has a line drawn through it when the content is collapsed. This can be combined with dimming.
-- rotate-chevron-when-collapsed: the collapse-control element is prefixed with a downward-pointing triangle, which is rotated to point to the right when the content is collapsed.
-- animate-when-collapsed: the collapsing content shrinks to nothing rather than simply disappearing. Note that this does not behave correctly if the collapsing content consists of table rows, as table rows do not honour min-height.
+- **(no class required)**: buttons in collapse-control element (the first child of the element with the collapsible-section class) are styled like ordinary content.
+- **dim-when-collapsed**: the collapse-control element is rendered semi-transparent when the content is collapsed.
+- **line-through-when-collapsed**: the collapse-control element has a line drawn through it when the content is collapsed. This can be combined with dimming.
+- **rotate-chevron-when-collapsed**: the collapse-control element is prefixed with a downward-pointing triangle, which is rotated to point to the right when the content is collapsed.
+- **animate-when-collapsed**: the collapsing content shrinks to nothing rather than simply disappearing. Note that this does not behave correctly if the collapsing content consists of table rows, as table rows do not honour min-height.
 
 ### hide-checkboxes-and-dim-labels.css
 
 
 Given a DOM structure like
+```html
      <ul class="hide-checkboxes-and-dim-labels">
          <li><input type="checkbox" id="a"><label for="a">My Label</label></li>
      </ul>
+```
 
 These CSS rules will hide the checkbox and will instead dim the label text when
 the checkbox is unchecked. Note that the hidden checkbox is still interactive since
@@ -226,9 +228,11 @@ it has a label that the user can click on.
 
 
 Given a DOM structure like
+```html
      <ul class="hide-checkboxes-and-line-through-labels">
          <li><input type="checkbox" id="a"><label for="a">My Label</label></li>
      </ul>
+```
 
 These CSS rules will hide the checkbox and will instead dim the label text and draw
 a line through it when the checkbox is unchecked.  Note that the hidden checkbox is
@@ -238,9 +242,11 @@ still interactive since it has a label that the user can click on.
 
 
 Given a DOM structure like
+```html
      <ul class="hide-checkboxes-and-use-disclosures">
          <li><input type="checkbox" id="a"><label for="a">My Label</label></li>
      </ul>
+```
 
 These CSS rules will hide the checkbox and will instead draw a disclosure triangle.
 When the checkbox is checked and unchecked the triangle will animate a rotation from

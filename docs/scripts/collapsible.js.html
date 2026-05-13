@@ -1,0 +1,124 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>collapsible.js</title>
+<style type="text/css">
+body {
+    font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Constantia, Georgia, serif !important;
+    max-width: 7in;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5in;
+    padding: 1em;
+    line-height: 1.25em;
+}
+
+heading {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+}
+
+code {
+    color: brown;
+}
+
+h2,p {
+    margin-bottom: 0;
+}
+
+td {
+    padding-bottom: 1em;
+}
+
+li {
+    list-style-type: none;
+    margin-bottom: 0.5em;
+}
+
+input[type="checkbox"] {
+    margin-right: 0.5em;
+}
+
+pre {
+    color: purple;
+}
+
+footer {
+    color: gray;
+    font-size: smaller;
+    margin-top: 5em;
+    text-align: right;
+}
+footer a {
+    color: inherit;
+}
+
+.explanation {
+    font-size: larger;
+}
+.horizontal-group {
+    display: flex;
+    flex-direction: row;
+}
+
+/* rules to put the footer at the bottom of the page */
+
+body {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+footer {
+    flex-grow: 1000;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+footer .line-above {
+    display: inline-block;
+    border-top: 1px solid lightgray;
+    padding-top: 0.5em;
+    margin-bottom: 1em;
+}
+</style>
+</head>
+<body>
+<h1>collapsible.js</h1>
+<p>Collapsible allows you to expand and collapse sections with the click of the mouse.</p>
+<p>To use it, you have a give a container (typically a DIV, SECTION, or TABLE) the class
+&quot;collapsible-section&quot;.  The first child of the container (typically a H2 or TR) will
+be turned into a trigger that, when clicked, causes the remaining children to appear
+or disappear.</p>
+<p>Note that the first element child does not <em>have</em> to include a button, but it is good
+practice for it to do so as this helps with the accessibility of your web page.</p>
+<p>e.g.,</p>
+<pre><code class="language-html">&lt;section class=&quot;collapsible-section&quot;&gt;
+  &lt;h2&gt;&lt;button&gt;Rutabagas&lt;/button&gt;&lt;/h2&gt;
+  &lt;p&gt;Rutabagas are a vegetable.&lt;/p&gt;
+  &lt;p&gt;Some people like them. Some people don&#39;t&lt;/p&gt;
+&lt;/section&gt;
+</code></pre>
+<p>If you also include the <em>longpress.js</em> script then the user can long-press or
+Command-click (Control-click on Windows) a button to expand the section and collapse
+all others.  You must include the <em>longpress.js</em> script before <em>collapsible.js</em>.</p>
+<p>[<a href=".">Back</a>]</p>
+
+<footer>
+<div>
+<div class="line-above">
+This page is part of the <a href="https://westkestrel.github.io/js1-klib/">js1-klib documentation</a> and is 
+&copy; 2026 under the terms of the <a href="https://github.com/westkestrel/js1-klib#MIT-1-ov-file">MIT License</a>
+</div>
+</div>
+</footer>
+</body>
+</html>

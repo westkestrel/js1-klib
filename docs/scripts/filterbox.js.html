@@ -1,0 +1,156 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>filterbox.js</title>
+<style type="text/css">
+body {
+    font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Constantia, Georgia, serif !important;
+    max-width: 7in;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5in;
+    padding: 1em;
+    line-height: 1.25em;
+}
+
+heading {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+}
+
+code {
+    color: brown;
+}
+
+h2,p {
+    margin-bottom: 0;
+}
+
+td {
+    padding-bottom: 1em;
+}
+
+li {
+    list-style-type: none;
+    margin-bottom: 0.5em;
+}
+
+input[type="checkbox"] {
+    margin-right: 0.5em;
+}
+
+pre {
+    color: purple;
+}
+
+footer {
+    color: gray;
+    font-size: smaller;
+    margin-top: 5em;
+    text-align: right;
+}
+footer a {
+    color: inherit;
+}
+
+.explanation {
+    font-size: larger;
+}
+.horizontal-group {
+    display: flex;
+    flex-direction: row;
+}
+
+/* rules to put the footer at the bottom of the page */
+
+body {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+footer {
+    flex-grow: 1000;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+footer .line-above {
+    display: inline-block;
+    border-top: 1px solid lightgray;
+    padding-top: 0.5em;
+    margin-bottom: 1em;
+}
+</style>
+</head>
+<body>
+<h1>filterbox.js</h1>
+<p>Filterbox allows you to use checkboxes to show and hide rows of data.</p>
+<p>To use it, you ensure that your HTML has a controls block. Note that if you omit the
+<code>id=&quot;&quot;</code> and <code>for=&quot;&quot;</code> tags on the input and label, they will be inferred from the
+label contents.  In the code below</p>
+<ul>
+<li>the first checkbox toggles &quot;cats&quot; (despite the label being &quot;Felines&quot;)</li>
+<li>the second toggles &quot;dogs&quot; (inferred from the label)</li>
+<li>the third toggles &quot;bugs&quot;, and ignores the explanatory text after the colon</li>
+<li>the fourth toggles &quot;bugs&quot;, and ignores the explanatory text in parenthesis</li>
+<li>the fifth toggles &quot;eight-legs&quot; (8 became eight since CSS class names cannot begin with digits)</li>
+<li>the sixth toggles &quot;birds-and-bees&quot; (spaces become hyphens)</li>
+<li>the seventh toggles both &quot;birds&quot; and &quot;Bees&quot; (commas separate items)</li>
+</ul>
+<pre><code class="language-html">&lt;ul class=&quot;filterbox-controls filter-animals&quot;&gt;
+  &lt;li&gt;&lt;input type=&quot;checkbox&quot; id=&quot;cats&quot;&gt;&lt;label for=&quot;cats&quot;&gt;Felines&lt;/label&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;input type=&quot;checkbox&quot;&gt;&lt;label&gt;Dogs&lt;/label&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;input type=&quot;checkbox&quot;&gt;&lt;label&gt;Bugs: six-legged beasties&lt;/label&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;input type=&quot;checkbox&quot;&gt;&lt;label&gt;Bugs (six-legged beasties)&lt;/label&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;input type=&quot;checkbox&quot;&gt;&lt;label&gt;8-Legs (arachnids and octopi)&lt;/label&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;input type=&quot;checkbox&quot;&gt;&lt;label&gt;Birds and Bees&lt;/label&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;input type=&quot;checkbox&quot;&gt;&lt;label&gt;Birds, Bees&lt;/label&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</code></pre>
+<p>Your HTML also must have a data block:</p>
+<pre><code class="language-html">&lt;table class=&quot;filterbox-data filter-animals&quot;&gt;
+  &lt;tr class=&quot;cats&quot;&gt;...&lt;/tr&gt;
+  &lt;tr class=&quot;cats&quot;&gt;...&lt;/tr&gt;
+  &lt;tr class=&quot;dogs&quot;&gt;...&lt;/tr&gt;
+  &lt;tr class=&quot;bugs&quot;&gt;...&lt;/tr&gt;
+  &lt;tr class=&quot;eight-legs&quot;&gt;...&lt;/tr&gt;
+  &lt;tr class=&quot;birds&quot;&gt;...&lt;/tr&gt;
+  &lt;tr class=&quot;bees&quot;&gt;...&lt;/tr&gt;
+  &lt;tr class=&quot;birds-and-bees&quot;&gt;...&lt;/tr&gt;
+&lt;/table&gt;
+</code></pre>
+<p>When the user toggles the checkbox for a given id, all data elements with that
+CSS class have their visibility toggled. In the case above if the user toggles
+the last checkbox both the &quot;birds&quot; and &quot;bees&quot; rows will be hidden, but not the
+&quot;birds-and-bees&quot; row.</p>
+<hr>
+<p>Filterbox pairs very nicely with checkbox-radio-group, which allow the user to
+command-click (or long-press) to toggle the visibility of all items <em>except</em> the one
+they just selected, and with stored-checkbox-state, which preserves checkbox state
+across page-loads using local storage.</p>
+<p>It also pairs nicely with stored-checkbox-state, which preserves checkbox state in
+local-storage between page-loads.</p>
+<p>If you do use either or both of these other files you must include them <em>after</em> this
+one, so that this file&#39;s setup will have created the checkbox html elements (and
+attached its event listeners) before those files attempt to work with them.</p>
+<p>[<a href=".">Back</a>]</p>
+
+<footer>
+<div>
+<div class="line-above">
+This page is part of the <a href="https://westkestrel.github.io/js1-klib/">js1-klib documentation</a> and is 
+&copy; 2026 under the terms of the <a href="https://github.com/westkestrel/js1-klib#MIT-1-ov-file">MIT License</a>
+</div>
+</div>
+</footer>
+</body>
+</html>
