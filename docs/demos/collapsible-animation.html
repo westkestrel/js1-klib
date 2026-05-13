@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Animated collapse</title>
+<link rel='stylesheet' href='style.css'>
+<link rel='stylesheet' href='lib/collapsible.css'>
+<style type="text/css">
+th {
+  text-align: left;
+}
+</style>
+<script src="lib/longpress.js"></script>
+<script src="lib/collapsible.js"></script>
+</head>
+<body class="rotate-chevron-when-collapsed animate-when-collapsed">
+<heading>
+<h1>Animated collapse</h1>
+<nav class="demo-index-link">[<a href="..">Back to docs</a>]</nav>
+</heading>
+<p>
+This HTML page demonstrates how to use the <em>collapsible.js</em> script to expand and collapse sections of your page
+using CSS animation.
+The page consists of several <code>&lt;section class="collapsible-section"&gt;</code> tags,
+each of which contains a heading followed by one or more paragraphs of content.
+The <code>body</code> tag has <code>class="rotate-chevron-when-collapsed animate-when-collapsed"</code> to trigger
+the two animations that you see below when you click the headings below to show and hide their content.
+</p>
+<p>
+The visual styling of the headings when hovered and when collapsed comes from the <em>collapsible.css</em> file.
+If you do not include this file (or copy the relevant rules into your own CSS) then the show/hide behaviour will
+continue to work but the animation will not.
+</p>
+<section class="collapsible-section">
+<h2><button>Animals (heading + div &gt p, p, p)</button></h2>
+<div>
+<p class="explanation">
+This heading is followed by a single <code>&lt;div&gt;</code> element which contains multiple <code>&lt;p&gt;</code> elements.
+This produces nice smooth "collapse" and "expand" animations.  On the downside, it can lead to clipping if the content is taller than the <code>200vh</code> that the animation is expanding to.
+</em>
+<p>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer odio risus, porttitor at gravida et, lacinia ut nisl. Vestibulum augue lorem, euismod sed erat in, vulputate lobortis elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Etiam imperdiet, enim at blandit condimentum, nisi lectus facilisis ex, sit amet aliquam mauris ligula at augue. Sed quam nisl, bibendum quis orci ut, pretium sollicitudin ante. Nam tristique luctus leo, vitae viverra justo feugiat a. Phasellus lectus lectus, fringilla sit amet leo sed, luctus tempus nunc. Quisque pretium neque et metus fermentum gravida non non sapien. Mauris rhoncus erat a nulla tempus, vel porta massa ultrices. Vestibulum nec fringilla nulla. Curabitur risus eros, congue quis dapibus ac, porta in mi. Cras at felis justo.
+</p>
+<p>
+Maecenas auctor tortor commodo, fringilla est sit amet, hendrerit risus. In leo augue, gravida sit amet congue vel, imperdiet auctor metus. Etiam vitae euismod ligula. Nam eget erat orci. In pretium commodo dui pretium lacinia. Sed et sem et sapien efficitur imperdiet vel nec nisl. Nullam condimentum nec mauris ac euismod. Aenean facilisis nisl at velit pulvinar mattis. Nam blandit viverra diam, ac euismod nulla. Pellentesque vestibulum enim nec rhoncus blandit. Fusce ullamcorper lobortis quam, ac congue ex sagittis id. Nam ornare, lectus et varius ultrices, felis ligula ullamcorper augue, ut convallis est nisi sed tortor.
+</p>
+<p>
+Integer tristique tempor neque vitae pretium. Nullam eleifend ipsum sit amet purus venenatis malesuada ut ac massa. Sed ut ipsum dignissim, tincidunt velit nec, placerat sem. Pellentesque blandit orci purus, in mollis urna aliquet fermentum. Duis venenatis lacus non eros tristique fringilla. Aenean aliquet lobortis venenatis. Mauris venenatis risus ut ex tristique suscipit. Proin id ullamcorper ligula. Mauris et dolor diam. Nunc libero est, euismod nec urna ac, imperdiet interdum nisi. Integer varius a erat vel commodo.
+</p>
+<p class="explanation">
+Observe that if you resize the browser window to be very small, this paragraph will not be shown even in the "expanded" state.
+</p>
+</div>
+</section>
+<section class="collapsible-section">
+<h2><button>Vegetables (heading + p, p, p)</button></h2>
+<p class="explanation">
+This heading is followed by multiple <code>&lt;p&gt;</code> elements.
+This avoids the clipping problem described above, but the animation is not as smooth because of the number of elements that are being animated.
+</p>
+<p>
+Aliquam fringilla metus a placerat ornare. Nullam sed egestas nisi. Donec eleifend nisl quis ante fermentum, quis placerat turpis ornare. Integer luctus dictum quam vitae ornare. Cras volutpat est ac massa fringilla fringilla. In luctus sem purus, eget convallis ipsum maximus sit amet. Etiam vitae bibendum leo, eget cursus ante. In ac dui nisl. Suspendisse at mollis ipsum. Mauris porta odio vitae erat fermentum iaculis. Praesent porta mauris nec justo cursus, quis consectetur mauris tincidunt. Fusce nulla libero, feugiat finibus urna eu, facilisis gravida urna. Phasellus vitae orci tincidunt, luctus nisl at, laoreet arcu.
+</p>
+<p>
+Morbi est ex, tristique sed eros et, pellentesque tincidunt diam. Proin tincidunt sodales mi a efficitur. Morbi ultricies at augue at semper. Pellentesque efficitur ipsum tincidunt nibh tempor tempus. In vehicula erat et odio bibendum efficitur. Vestibulum eu odio et tortor finibus tincidunt eu et metus. Pellentesque et sollicitudin odio. Suspendisse ornare dictum mi, eu bibendum odio interdum nec. Nulla consequat eros nunc, eget facilisis enim pharetra nec. Morbi sit amet enim ornare, vestibulum mi non, hendrerit velit. Morbi vel dapibus elit. Ut commodo at nibh ut convallis. Nam neque eros, ultricies quis nunc sit amet, porta efficitur enim. Curabitur convallis pharetra urna in viverra.
+</p>
+<p>
+Duis nunc erat, vehicula vel purus at, sagittis pulvinar libero. Donec a felis a nunc vehicula fermentum non a tellus. Quisque sed viverra neque. Cras non dui vitae mauris porta gravida sed ac est. Duis imperdiet placerat tristique. Morbi dictum lacus est, semper cursus felis cursus vitae. Quisque efficitur arcu a odio sagittis, id sollicitudin leo bibendum. Aliquam ac velit eget neque ullamcorper dictum. Maecenas laoreet augue id pretium vehicula. Nulla euismod, ligula a sodales feugiat, erat ex pulvinar diam, eget malesuada risus libero eu augue. Curabitur pulvinar, urna nec maximus condimentum, tellus tellus posuere enim, ut facilisis arcu dolor eu nisi. Morbi efficitur elementum enim ac euismod.
+</p>
+<p class="explanation">
+Observe that this paragraph will remain visible when in the "expanded" state, no matter how small you make the browser window.
+</p>
+</section>
+<table cellpadding="0" cellspacing="0">
+<tbody class="collapsible-section">
+<tr><th>
+<h2><button>Minerals (table body)</button></h2>
+</th></tr>
+<tr><td class="explanation">
+<p>
+This is a table whose <code>&lt;tbody&gt;</code> has been given the <code>collapsible-section</code> class,
+and whose first row contains the heading.
+Note that even when collapsed there is quite a bit of whitespace.  The <code>max-height</code> CSS property can not be used to reduce the height of a row or cell to zero; if it has content then it will always have a minimum height approximately equal to the font size.
+</p>
+<p>
+So... you unfortunately cannot use this script to animate the collapse and expansion of table rows.
+</p>
+</td></tr>
+<tr><td>
+Praesent nibh purus, elementum ut tortor nec, interdum maximus eros. Phasellus accumsan non magna eu convallis. Donec et fringilla dolor, at posuere sem. Maecenas rhoncus ipsum in mollis facilisis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aliquam massa sapien, pellentesque in hendrerit laoreet, tincidunt vel nisl. Suspendisse potenti. Pellentesque eu nisl ut sapien lobortis faucibus non sed odio. Aliquam vulputate arcu ac magna cursus rutrum nec in turpis. Curabitur vel arcu in leo vestibulum auctor.
+</td></tr>
+<tr><td>
+Nullam dictum mollis eros id laoreet. Suspendisse consectetur ornare quam, eu ultrices elit ornare quis. Vestibulum vulputate, libero ut lacinia rhoncus, ex quam ultricies nisi, quis feugiat nibh tellus id lorem. Nulla sed mauris nec nibh placerat lacinia. Ut tincidunt nulla justo, eu ullamcorper ex consectetur malesuada. Duis ultrices mollis magna, eget porttitor urna luctus a. Sed semper nec neque sit amet sodales. Nullam mollis urna eget ullamcorper sagittis. Integer mauris sapien, bibendum vitae tincidunt eget, vehicula et nisl. Nulla vel viverra odio. Sed aliquam faucibus commodo. Mauris nibh elit, vestibulum a tempus eu, ullamcorper et lacus. Donec justo felis, pulvinar vitae tempor non, lacinia ac massa.
+</td></tr>
+<tr><td>
+Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Sed massa neque, luctus et ultrices porttitor, consectetur eget arcu. Praesent vel cursus velit. Fusce volutpat dui porta mi blandit eleifend. Nunc non vulputate est. Morbi vulputate quam erat, a congue massa eleifend sit amet. Nulla lacinia, nunc in consequat porttitor, mauris ex dictum lacus, eget tincidunt odio massa non mi. In commodo ornare nulla, vel feugiat elit finibus eu. Nullam quis neque id turpis fringilla consequat. Integer vehicula arcu in volutpat egestas. Praesent ut vulputate nulla. Aliquam vulputate nisi fringilla, ornare augue in, elementum sapien.
+</td></tr>
+</tbody>
+<tbody class="collapsible-section">
+<tr><th>
+<h2><button>Luminals (table body)</button></h2>
+</th></tr>
+<tr><td class="explanation">
+This is another <code>&lt;tbody&gt;</code> within the same table.
+</td></tr>
+<tr><td>
+Praesent nibh purus, elementum ut tortor nec, interdum maximus eros. Phasellus accumsan non magna eu convallis. Donec et fringilla dolor, at posuere sem. Maecenas rhoncus ipsum in mollis facilisis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aliquam massa sapien, pellentesque in hendrerit laoreet, tincidunt vel nisl. Suspendisse potenti. Pellentesque eu nisl ut sapien lobortis faucibus non sed odio. Aliquam vulputate arcu ac magna cursus rutrum nec in turpis. Curabitur vel arcu in leo vestibulum auctor.
+</td></tr>
+<tr><td>
+Nullam dictum mollis eros id laoreet. Suspendisse consectetur ornare quam, eu ultrices elit ornare quis. Vestibulum vulputate, libero ut lacinia rhoncus, ex quam ultricies nisi, quis feugiat nibh tellus id lorem. Nulla sed mauris nec nibh placerat lacinia. Ut tincidunt nulla justo, eu ullamcorper ex consectetur malesuada. Duis ultrices mollis magna, eget porttitor urna luctus a. Sed semper nec neque sit amet sodales. Nullam mollis urna eget ullamcorper sagittis. Integer mauris sapien, bibendum vitae tincidunt eget, vehicula et nisl. Nulla vel viverra odio. Sed aliquam faucibus commodo. Mauris nibh elit, vestibulum a tempus eu, ullamcorper et lacus. Donec justo felis, pulvinar vitae tempor non, lacinia ac massa.
+</td></tr>
+<tr><td>
+Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Sed massa neque, luctus et ultrices porttitor, consectetur eget arcu. Praesent vel cursus velit. Fusce volutpat dui porta mi blandit eleifend. Nunc non vulputate est. Morbi vulputate quam erat, a congue massa eleifend sit amet. Nulla lacinia, nunc in consequat porttitor, mauris ex dictum lacus, eget tincidunt odio massa non mi. In commodo ornare nulla, vel feugiat elit finibus eu. Nullam quis neque id turpis fringilla consequat. Integer vehicula arcu in volutpat egestas. Praesent ut vulputate nulla. Aliquam vulputate nisi fringilla, ornare augue in, elementum sapien.
+</td></tr>
+</tbody>
+</table>
+<hr/>
+<body>
+</html>

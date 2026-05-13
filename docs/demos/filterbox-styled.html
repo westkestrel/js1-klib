@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Filter-box with styling</title>
+<link rel='stylesheet' href='style.css'>
+<link rel='stylesheet' href='lib/klib.css'>
+<script src="lib/filterbox.js"></script>
+<script src="lib/longpress.js"></script>
+<script src="lib/radio-checkbox-group.js"></script>
+</head>
+<body class="hide-checkboxes-and-line-through-labels">
+<heading>
+<h1>Filter-box with styling</h1>
+<nav class="demo-index-link">[<a href="..">Back to docs</a>]</nav>
+</heading>
+<p>
+This page is like the <a href="filterbox-unstyled.html">other filterbox demo</a>, except that it uses the CSS rules to hide the checkboxes and instead dim and strike the labels when the box is unchecked.
+You might find this more aesthetically pleasing, but you will need to have instructive text or else the users may not realize that the labels are clickable.
+</p>
+<p>
+The first column of controls also has the <a href="radio-checkbox-group.html">radio-checkbox-group</a> class applied,
+which is a useful enhancement to these sorts of controls.
+</p>
+<section>
+<h2>Controls</h2>
+<p>Click on the labels in the <strong>controls</strong> section to show and hide the relevant content.</p>
+<p>Press and hold (or Command-click) on a label in the first column to select it and deselect all others.</p>
+<div class="horizontal-group">
+<ul class="filterbox-controls filter-dermis radio-checkbox-group">
+<li><input type="checkbox"><label>Fur</label></li>
+<li><input type="checkbox"><label>Feathers</label></li>
+<li><input type="checkbox"><label>Scales</label></li>
+</ul>
+<ul class="filterbox-controls filter-legs">
+<li><input type="checkbox"><label>4 legs</label></li>
+<li><input type="checkbox"><label>2 legs</label></li>
+<li><input type="checkbox" id="no-legs"><label>0 legs</label></li>
+</ul>
+</div>
+</section>
+<section class="filterbox-data filter-dermis filter-legs">
+<h2>Content</h2>
+<p class="fur four-legs">Cat</p>
+<p class="fur four-legs">Rat</p>
+<p class="fur four-legs">Dog</p>
+<p class="fur two-legs">Gorilla</p>
+<p class="feathers two-legs">Eagle</p>
+<p class="feathers two-legs">Crow</p>
+<p class="feathers scales two-legs">Psittacosaurus</p>
+<p class="scales no-legs">Cobra</p>
+<p class="scales four-legs">Komodo Dragon</p>
+</section>
+<body>
+</html>

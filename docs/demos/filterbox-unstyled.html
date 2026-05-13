@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Filter-box</title>
+<link rel='stylesheet' href='style.css'>
+<script src="lib/filterbox.js"></script>
+<script src="lib/longpress.js"></script>
+<script src="lib/radio-checkbox-group.js"></script>
+</head>
+<body>
+<heading>
+<h1>Filter-box</h1>
+<nav class="demo-index-link">[<a href="..">Back to docs</a>]</nav>
+</heading>
+<p>
+This HTML page demonstrates how to use the <em>filterbox.js</em> script to show and hide content on your page.
+The page consists of a <code>&lt;section class="filterbox-data"&gt;</code> tag containing checkboxes,
+and a <code>&lt;section class="filterbox-content"&gt;</code> containing content to be filtered.
+Click the filters below to show and hide their content.
+</p>
+<p>
+The first column of controls also has the <a href="radio-checkbox-group.html">radio-checkbox-group</a> class applied,
+which is a useful enhancement to these sorts of controls.
+After you have experimented with this page, you might want to look at the <a href="filterbox-styled.html">filterbox with styling</a> demo.
+</p>
+<section>
+<h2>Controls</h2>
+<p>Press and hold (or Command-click) on a checkbox in the first column to select it and deselect all others.</p>
+<div class="horizontal-group">
+<ul class="filterbox-controls filter-dermis radio-checkbox-group">
+<li><input type="checkbox"><label>Fur</label></li>
+<li><input type="checkbox"><label>Feathers</label></li>
+<li><input type="checkbox"><label>Scales</label></li>
+</ul>
+<ul class="filterbox-controls filter-legs">
+<li><input type="checkbox"><label>4 legs</label></li>
+<li><input type="checkbox"><label>2 legs</label></li>
+<li><input type="checkbox" id="no-legs"><label>0 legs</label></li>
+</ul>
+</div>
+</section>
+<section class="filterbox-data filter-dermis filter-legs">
+<h2>Content</h2>
+<p class="fur four-legs">Cat</p>
+<p class="fur four-legs">Rat</p>
+<p class="fur four-legs">Dog</p>
+<p class="fur two-legs">Gorilla</p>
+<p class="feathers two-legs">Eagle</p>
+<p class="feathers two-legs">Crow</p>
+<p class="feathers scales two-legs">Psittacosaurus</p>
+<p class="scales no-legs">Cobra</p>
+<p class="scales four-legs">Komodo Dragon</p>
+</section>
+<hr/>
+<p>
+Things to observe when you inspect the page elements as you interact with the page:
+<ul>
+<li>
+Each of the content paragraphs is decorated with CSS classes (e.g., <code>fur</code> and <code>four-legs</code> for <strong>Cat</strong>).
+When you uncheck a checkbox a filter class (e.g., <code>hide-fur</code>) is added to the data container and any paragraphs with that value class are hidden.
+</li>
+<li>
+An animal shows up if it satisfies at least one checkbox in a column.
+For example, the dinosaur <strong>Psittacosaurus</strong> has both feathers and scales, so either checkbox will make it visible.
+This is a bit counter-intuitive as the data container has the class <code>hide-feathers</code> but the dinosaur is shown because <code>hide-scales</code> is not also present.
+<em>I had to choose between "show-XXX" and "hide-XXX" for the naming and went with "hide" because the CSS rules use <code>display: none</code>, even though the specific rule in this case only kicks in if both hide classes are present.</em>
+</li>
+<li>
+For an animal to show up it must satisfy at least one checkbox in <em>both</em> columns &mdash; if you hide either <strong>fur</strong> or <strong>4 legs</strong> the cat is hidden.
+This is because one column has class <code>filter-dermis</code> and the other has class <code>filter-legs</code> so the "show if any checkbox is satisfied" behaviour described above does not apply.
+</li>
+<li>
+When you toggle <strong>4 legs</strong> the class that is added is <code>hide-four-legs</code> &mdash; the number turns into a word.
+This is important since CSS class names cannot begin with a digit.
+</li>
+<li>
+When you toggle <strong>0 legs</strong> the class that is added is <code>hide-no-legs</code> &mdash; because <code>id="no-legs"</code> was explicitly set on the checkbox and that overrides the general digits-to-words behaviour.
+</li>
+<li>
+You can press and hold on a checkbox in the first column to treat it as a radio button and deselect all other checkboxes in that column.
+This is due to code in <em>radio-checkbox-group.js</em> and the presence of the <code>radio-checkbox-group</code> class on the container.  I strongly recommend including that file and adding that class to all of your control sets;
+it makes the first column much more usable than the second column.
+</li>
+</ul>
+</p>
+<body>
+</html>
