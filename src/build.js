@@ -125,10 +125,8 @@ function updateReadmeBlock(block, helpContent) {
     const key = name.toLowerCase()
     const help = helpContent[key] || helpContent[name] || helpContent[name.toLowerCase()]
     if (!help) {
-        console.warn(`no README content found for ${name}`)
         return block
     }
-    console.log(`...for ${name}`)
     return `${name}\n\n${help}${tail}`.trim() + '\n\n'
 }
 
