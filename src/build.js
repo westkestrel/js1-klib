@@ -33,8 +33,12 @@ ${HTML_STYLE}
 const COPYRIGHT_YEAR = new Date().toISOString().substring(0, 4)
 const HTML_POSTAMBLE = `
 <footer>
+<div>
+<div class="line-above">
 This page is part of the <a href="https://westkestrel.github.io/js1-klib/">js1-klib documentation</a> and is 
 &copy; ${COPYRIGHT_YEAR} under the terms of the <a href="https://github.com/westkestrel/js1-klib#MIT-1-ov-file">MIT License</a>
+</div>
+</div>
 </footer>
 </body>
 </html>
