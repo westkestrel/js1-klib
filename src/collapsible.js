@@ -12,9 +12,9 @@
  * e.g.,
  * ```html
  * <section class="collapsible-section">
- * <h2><button>Rutabagas</button></h2>
- * <p>Rutabagas are a vegetable.</p>
- * <p>Some people like them. Some people don't</p>
+ *   <h2><button>Rutabagas</button></h2>
+ *   <p>Rutabagas are a vegetable.</p>
+ *   <p>Some people like them. Some people don't</p>
  * </section>
  * ```
  *

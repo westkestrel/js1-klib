@@ -1,6 +1,7 @@
 /**
- * Navigation Without Bookmarks allows the user to click anchor links (e.g., <a href="#foo">)
- * to jump to that portion of the web page without adding the anchor to the end of the
+ * If you add `class="navigation-without-bookmarks"` to an HTML container (e.g., a `div`
+ * or `section`) then any anchor links within that container (e.g., `<a href="#anchor">`)
+ * will jump to that portion of the web page without adding the anchor to the end of the
  * URL.
  */ 
 const navigationWithoutBookmarksBootstrap = () => {
