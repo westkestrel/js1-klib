@@ -55,21 +55,19 @@ function main() {
         helpContent[file.toLowerCase()] = extractHelpContent(content)
         if (file.endsWith('.js')) allJavaScript.push(versionedContent)
         if (file.endsWith('.css')) allStyles.push(versionedContent)
-        writeIfChanged(dst, licenseForIndividualFile + versionedContent)
+        writeDistribution(dst, licenseForIndividualFile + versionedContent)
     }
     
     const javaScriptDst = `dist/klib.js`
-    console.log('updating', javaScriptDst)
-    writeFileSync(javaScriptDst, allJavaScript.join('\n\n'), ENCODING)
+    writeDistribution(javaScriptDst, allJavaScript.join('\n\n'))
 
     const styleDst = `dist/klib.css`
-    console.log('updating', styleDst)
-    writeFileSync(styleDst, allStyles.join('\n\n'), ENCODING)
+    writeDistribution(styleDst, allStyles.join('\n\n'))
 
     var readmeBlocks = readFileSync('README.md', ENCODING).split(/^### /m)
     console.log('updating README.md')
     var readmeContent = readmeBlocks.map(b => updateReadmeBlock(b, helpContent)).join('### ')
-    writeFileSync('README.md', readmeContent, ENCODING)
+    writeMarkdown('README.md', readmeContent)
     
     updateDocs(helpContent)
 }
@@ -106,11 +104,21 @@ function updateReadmeBlock(block, helpContent) {
     return `${name}\n\n${help}${tail}`.trim() + '\n\n'
 }
 
-function writeIfChanged(path, content) {
+function writeDistribution(path, content) {
     if (existsSync(path) && !hasMeaningfulChanges(readFileSync(path, ENCODING), content)) {
         console.log(`no changes for ${path}`)
         return
     }
+    console.log(`updating ${path}`)
+    writeFileSync(path, content, ENCODING)
+}
+
+function writeMarkdown(path, content) {
+    console.log(`updating ${path}`)
+    writeFileSync(path, content, ENCODING)
+}
+
+function writeDemo(path, content) {
     console.log(`updating ${path}`)
     writeFileSync(path, content, ENCODING)
 }
@@ -166,16 +174,14 @@ function updateDocsIndex(helpContent) {
     }
     
     const indexPath = `docs/index.md`
-    console.log(`updating ${indexPath}`)
-    writeFileSync(indexPath, indexContent.join('\n'), ENCODING)
+    writeMarkdown(indexPath, indexContent.join('\n'))
 }
 
 function updateScriptDocs(helpContent) {
     if (!existsSync('docs/scripts')) mkdirSync('docs/scripts')
     for (const key of Object.keys(helpContent).sort().filter(s => s.endsWith('.js'))) {
         const docPath = `docs/scripts/${key}.md`
-        console.log(`updating ${docPath}`)
-        writeFileSync(docPath, `# ${key}\n\n${helpContent[key]}\n\n[[Back](.)]`, ENCODING)
+        writeMarkdown(docPath, `# ${key}\n\n${helpContent[key]}\n\n[[Back](.)]`)
     }
 }
 
@@ -183,8 +189,7 @@ function updateStylesheetDocs(helpContent) {
     if (!existsSync('docs/stylesheets')) mkdirSync('docs/stylesheets')
     for (const key of Object.keys(helpContent).sort().filter(s => s.endsWith('.css'))) {
         const docPath = `docs/stylesheets/${key}.md`
-        console.log(`updating ${docPath}`)
-        writeFileSync(docPath, `# ${key}\n\n${helpContent[key]}\n\n[[Back](.)]`, ENCODING)
+        writeMarkdown(docPath, `# ${key}\n\n${helpContent[key]}\n\n[[Back](.)]`)
     }
 }
 
@@ -199,8 +204,7 @@ function updateDocDemos() {
             .replaceAll("Back to demo list", 'Back to docs')
         const dstPath = `docs/demos/${basename(srcPath)}`
         const relPath = `../../../${dstPath}`
-        console.log(`updating ${dstPath}`)
-        writeFileSync(dstPath, content)
+        writeDemo(dstPath, content)
     }
     for (const srcPath of globSync('dist/*').sort()) {
         const dstPath = `docs/demos/lib/${basename(srcPath)}`
