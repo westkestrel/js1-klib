@@ -6,5 +6,8 @@
   "license": "MIT",
   "scripts": {
     "build": "node src/build.js"
+  },
+  "devDependencies": {
+    "marked": "^18.0.3"
   }
 }
