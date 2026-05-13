@@ -10,7 +10,8 @@
  */
 
 import { argv } from 'process'
-import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'fs'
+import { copyFileSync, existsSync, globSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'fs'
+import { basename } from 'path'
 
 const ENCODING = { encoding: 'utf8' }
 
@@ -69,6 +70,8 @@ function main() {
     console.log('updating README.md')
     var readmeContent = readmeBlocks.map(b => updateReadmeBlock(b, helpContent)).join('### ')
     writeFileSync('README.md', readmeContent, ENCODING)
+    
+    updateDocs(helpContent)
 }
 
 function getProjectVersion() {
@@ -123,6 +126,88 @@ function hasMeaningfulChanges(oldContent, newContent) {
         if (oldWithoutVersion != newWithoutVersion) return true
     }
     return false
+}
+
+function updateDocs(helpContent) {
+    updateDocsIndex(helpContent)
+    updateScriptDocs(helpContent)
+    updateStylesheetDocs(helpContent)
+    updateDocDemos()
+}
+
+function updateDocsIndex(helpContent) {
+    var demoLinksContent = readFileSync('demos/index.html', ENCODING)
+        .split('\n')
+        .filter(s => s.indexOf('<a href') > 0)
+        .map(s => s.replace(/.*href="([^"]+)".*?>(.*?)<.*/, '[Demo: $2](demos/$1)'))
+    const alreadyDemoed = new Set()
+    var indexContent = readFileSync('README.md', ENCODING)
+        .replace('project folder', 'library')
+        .replace(/\n*## Script[\s\S]+/, '')
+        .split('\n')
+    indexContent.push('')
+    indexContent.push('## Script Documentation')
+    for (const key of Object.keys(helpContent).sort().filter(k => k.endsWith('.js'))) {
+        indexContent.push(`- [${key}](scripts/${key}.html)`)
+        const keyword = key.replace(/\..*/, '')
+        for (const link of demoLinksContent.filter(s => s.indexOf(keyword) > 0)) {
+            indexContent.push(`  - ${link}`)
+            alreadyDemoed.add(link)
+        }
+    }
+    indexContent.push('')
+    indexContent.push('## Stylesheet Documentation')
+    for (const key of Object.keys(helpContent).sort().filter(k => k.endsWith('.css'))) {
+        indexContent.push(`- [${key}](stylesheets/${key}.html)`)
+        const keyword = key.replace(/\..*/, '')
+        for (const link of demoLinksContent.filter(s => !alreadyDemoed.has(s) && s.indexOf(keyword) > 0)) {
+            indexContent.push(`  - ${link}`)
+        }
+    }
+    
+    const indexPath = `docs/index.md`
+    console.log(`updating ${indexPath}`)
+    writeFileSync(indexPath, indexContent.join('\n'), ENCODING)
+}
+
+function updateScriptDocs(helpContent) {
+    if (!existsSync('docs/scripts')) mkdirSync('docs/scripts')
+    for (const key of Object.keys(helpContent).sort().filter(s => s.endsWith('.js'))) {
+        const docPath = `docs/scripts/${key}.md`
+        console.log(`updating ${docPath}`)
+        writeFileSync(docPath, `# ${key}\n\n${helpContent[key]}\n\n[[Back](.)]`, ENCODING)
+    }
+}
+
+function updateStylesheetDocs(helpContent) {
+    if (!existsSync('docs/stylesheets')) mkdirSync('docs/stylesheets')
+    for (const key of Object.keys(helpContent).sort().filter(s => s.endsWith('.css'))) {
+        const docPath = `docs/stylesheets/${key}.md`
+        console.log(`updating ${docPath}`)
+        writeFileSync(docPath, `# ${key}\n\n${helpContent[key]}\n\n[[Back](.)]`, ENCODING)
+    }
+}
+
+function updateDocDemos() {
+    if (!existsSync('docs/demos')) mkdirSync('docs/demos')
+    if (!existsSync('docs/demos/lib')) mkdirSync('docs/demos/lib')
+    for (const srcPath of globSync('demos/*').sort()) {
+        const content = readFileSync(srcPath, ENCODING)
+            .replaceAll('../dist/', 'lib/')
+            .replaceAll('href="."', 'href=".."')
+            .replaceAll("href='.'", 'href=".."')
+            .replaceAll("Back to demo list", 'Back to docs')
+        const dstPath = `docs/demos/${basename(srcPath)}`
+        const relPath = `../../../${dstPath}`
+        console.log(`updating ${dstPath}`)
+        writeFileSync(dstPath, content)
+    }
+    for (const srcPath of globSync('dist/*').sort()) {
+        const dstPath = `docs/demos/lib/${basename(srcPath)}`
+        const relPath = `../../../${dstPath}`
+        console.log(`updating ${dstPath}`)
+        copyFileSync(srcPath, dstPath)
+    }
 }
 
 main()
