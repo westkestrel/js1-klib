@@ -21,7 +21,7 @@
 * 
 */
 
-/** (version 0.2.0)
+/** (version 0.3.2)
  * Filterbox allows you to use checkboxes to show and hide rows of data.
  *
  * To use it, you ensure that your HTML has a controls block. Note that if you omit the

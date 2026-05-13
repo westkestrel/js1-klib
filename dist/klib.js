@@ -23,7 +23,7 @@
 
 
 
-/** (version 0.3.0)
+/** (version 0.3.2)
  * Filterbox allows you to use checkboxes to show and hide rows of data.
  *
  * To use it, you ensure that your HTML has a controls block. Note that if you omit the
@@ -290,7 +290,7 @@ window.addEventListener('load', wireUpAllFilterControlContainers)
 filterboxBootstrap()
 
 
-/** (version 0.3.0)
+/** (version 0.3.2)
  * Generate a new **longpress** event when the user holds the mouse button (or their
  * finger on a touch-sensitive device) on a link, button, checkbox, or radio button.
  * On a Mac the user can also Command-click the element to generate this event, and on
@@ -508,7 +508,7 @@ const longpressBootstrap = () => {
 longpressBootstrap()
 
 
-/** (version 0.3.0)
+/** (version 0.3.2)
  * If you add `class="navigation-without-bookmarks"` to an HTML container (e.g., a `div`
  * or `section`) then any anchor links within that container (e.g., `<a href="#anchor">`)
  * will jump to that portion of the web page without adding the anchor to the end of the
@@ -550,7 +550,7 @@ window.addEventListener('load', wireUpNavigationLinks)
 navigationWithoutBookmarksBootstrap()
 
 
-/** (version 0.3.0)
+/** (version 0.3.2)
  * Radio Checkbox Groups allow you to have checkboxes which behave like radio buttons
  * when Command-clicked or long-pressed. This is *not* a standalone script; if you include
  * it you must first include *longpress.js*.
@@ -709,7 +709,7 @@ window.addEventListener('load', wireUpRadioGroups)
 radioCheckboxGroupsBootstrap()
 
 
-/** (version 0.3.0)
+/** (version 0.3.2)
  * Stored Checkbox State preserves checkbox state between webpage reloads.
  *
  * If you decorate a container with `class="stored-checkbox-state"` then any checkboxes
@@ -751,7 +751,7 @@ window.addEventListener('load', wireUpElements)
 storedCheckboxStateBootstrap()
 
 
-/** (version 0.3.0)
+/** (version 0.3.2)
  * Collapsible allows you to expand and collapse sections with the click of the mouse.
  *
  * To use it, you have a give a container (typically a DIV, SECTION, or TABLE) the class

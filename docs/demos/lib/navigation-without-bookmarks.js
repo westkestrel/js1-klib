@@ -21,7 +21,7 @@
 * 
 */
 
-/** (version 0.2.0)
+/** (version 0.3.2)
  * If you add `class="navigation-without-bookmarks"` to an HTML container (e.g., a `div`
  * or `section`) then any anchor links within that container (e.g., `<a href="#anchor">`)
  * will jump to that portion of the web page without adding the anchor to the end of the

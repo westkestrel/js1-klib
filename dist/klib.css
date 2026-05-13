@@ -23,7 +23,7 @@
 
 
 
-/** (version 0.3.0)
+/** (version 0.3.2)
  * Given a DOM structure like
  * ```html
  *      <ul class="hide-checkboxes-and-dim-labels">
@@ -45,7 +45,7 @@
 
 
 
-/** (version 0.3.0)
+/** (version 0.3.2)
  * Given a DOM structure like
  * ```html
  *      <ul class="hide-checkboxes-and-line-through-labels">
@@ -67,7 +67,7 @@
 }
 
 
-/** (version 0.3.0)
+/** (version 0.3.2)
  * Given a DOM structure like
  * ```html
  *      <ul class="hide-checkboxes-and-use-disclosures">
@@ -109,7 +109,7 @@
 }
 
 
-/** (version 0.3.0)
+/** (version 0.3.2)
  * Styling rules for use with the *collapsible.js* script. You can use these styles, or
  * can disregard them and do your own styling; the script works correctly in either case.
  *

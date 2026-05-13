@@ -21,7 +21,7 @@
 * 
 */
 
-/** (version 0.3.0)
+/** (version 0.3.2)
  * Radio Checkbox Groups allow you to have checkboxes which behave like radio buttons
  * when Command-clicked or long-pressed. This is *not* a standalone script; if you include
  * it you must first include *longpress.js*.
