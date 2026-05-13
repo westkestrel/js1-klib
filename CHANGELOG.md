@@ -1,5 +1,13 @@
 # Change Log
 
+### 0.3.2 (13-May-2026)
+
+Add a **docs** folder and update the **build.js** script to populate it with with the contents of the README file, the doc comments at the top of each JavaScript and CSS file, and the demo pages.
+
+Add a link to the **README.md** file that points to the docs on **GitHub Pages**.
+
+No changes to the actual behaviour of any of the scripts in the library.
+
 ### 0.3.1 (12-May-2026)
 
 Fix a typo in the **longpress.js** doc comments.
