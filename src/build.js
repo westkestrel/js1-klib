@@ -151,9 +151,9 @@ function writeMarkdown(path, content, forcedType) {
 }
 
 function writeDemo(path, content) {
-    content = content.replaceAll('../dist/', 'lib/')
-            .replaceAll('href="."', 'href=".."')
-            .replaceAll("href='.'", 'href=".."')
+    content = content.replaceAll('../src/', 'lib/')
+            .replaceAll('href="index.html"', 'href=".."')
+            .replaceAll("href='index.html'", 'href=".."')
             .replaceAll("Back to demo list", 'Back to docs')
             .replace(/<\/body>[\S\s]+/, HTML_POSTAMBLE)
     console.log(`updating ${path}`)
@@ -190,6 +190,7 @@ function updateDocsIndex(helpContent) {
     var indexContent = readFileSync('README.md', ENCODING)
         .replace('project folder', 'library')
         .replace(/\n*## Script[\s\S]+/, '')
+        .replace(/You can view the.*?online\.\s+/, '')
         .split('\n')
     indexContent.push('')
     indexContent.push('## Script Documentation')
