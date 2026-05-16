@@ -48,7 +48,7 @@
  * ***
  *
  * Filterbox pairs very nicely with checkbox-radio-group, which allow the user to
- * command-click (or long-press) to toggle the visibility of all items *except* the one
+ * Command-click (or long-press) to toggle the visibility of all items *except* the one
  * they just selected, and with stored-checkbox-state, which preserves checkbox state
  * across page-loads using local storage.
  *

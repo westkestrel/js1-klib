@@ -1,11 +1,11 @@
 /**
  * Radio Checkbox Groups allow you to have checkboxes which behave like radio buttons
- * when Command-clicked or long-pressed. This is *not* a standalone script; if you include
+ * when Option-clicked or long-pressed. This is *not* a standalone script; if you include
  * it you must first include *longpress.js*.
  *
  * To use it, add `class="radio-checkbox-group"` to a container.  Now any checkboxes
- * within the container will behave normally when toggled, unless the Command key (on
- * a Mac) or Control key (on Windows) is held, or if the checkbox is long-pressed on a
+ * within the container will behave normally when toggled, unless the Option key (on
+ * a Mac) or Alt key (on Windows) is held, or if the checkbox is long-pressed on a
  * phone or tablet or long-clicked on computer.  Any of these gestures will trigger the
  * radio-checkbox-group behavior.
  *
