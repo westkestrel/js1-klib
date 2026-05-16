@@ -1,5 +1,9 @@
 # Change Log
 
+### 0.4.1 (16-May-2026)
+
+Update demo descriptions to reflect new Option-click behaviour.
+
 ## 0.4.0 (16-May-2026)
 
 Update *longpress.js* and *collapsible.js* to use Option-click rather than Command-click, and update various documentation comments accordingly. It appears that on Windows when the user presses and releases the Windows key (which is the equivalent of Command-clicking on a Mac) it brings up the system Start menu and there is nothing that JavaScript in a web browser can do to prevent this.
