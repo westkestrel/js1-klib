@@ -24,7 +24,6 @@
 const radioCheckboxGroupsBootstrap = () => {
 
 const wireUpCheckboxes = (checkboxes, labels) => {
-    var metaKey = false
     var justPerformedLongPress = false
     var timeout = null
     
@@ -97,7 +96,6 @@ const wireUpCheckboxes = (checkboxes, labels) => {
      */
     const longPress = event => {
         timeout = null
-        metaKey = true
         const htmlFor = getCheckboxId(event.target)
         const checkbox = htmlFor ? document.getElementById(htmlFor) : event.target
         if (!checkbox) {
