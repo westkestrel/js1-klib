@@ -21,7 +21,7 @@
 * 
 */
 
-/** (version 0.3.2)
+/** (version 0.3.3)
  * Collapsible allows you to expand and collapse sections with the click of the mouse.
  *
  * To use it, you have a give a container (typically a DIV, SECTION, or TABLE) the class
@@ -62,7 +62,7 @@ const isCollapsed = (elementOrClassString) => {
 
 const toggle = (event, solo) => {
     if (event.target.justHadLongPress) {
-        event.preventDefault
+        event.preventDefault()
         return true
     }
     

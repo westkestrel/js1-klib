@@ -21,7 +21,7 @@
 * 
 */
 
-/** (version 0.3.2)
+/** (version 0.3.3)
  * Generate a new **longpress** event when the user holds the mouse button (or their
  * finger on a touch-sensitive device) on a link, button, checkbox, or radio button.
  * On a Mac the user can also Command-click the element to generate this event, and on
@@ -123,7 +123,7 @@ const longpressBootstrap = () => {
         // command-clicking is the same as a long-press
         if (event.metaKey && !justPerformedLongPress) {
             longPress(event)
-            event.preventDefault
+            event.preventDefault()
         }
         
         return true
