@@ -43,7 +43,7 @@
  
 const longpressBootstrap = () => {
 
-    var metaKey = false
+    var altKey = false
     var justPerformedLongPress = false
     var timeout = null
 
@@ -72,7 +72,7 @@ const longpressBootstrap = () => {
     const hit = (event) => {
         justPerformedLongPress = false
         event.target.justHadLongPress = justPerformedLongPress
-        metaKey = event.metaKey
+        altKey = event.altKey
         if (timeout) clearTimeout(timeout)
         timeout = setTimeout(longPress, 1000, event)
         
@@ -91,14 +91,14 @@ const longpressBootstrap = () => {
             return true
         }
         
-        metaKey = event.metaKey
+        altKey = event.altKey
         if (timeout) {
             clearTimeout(timeout)
             timeout = null
         }
         
         // command-clicking is the same as a long-press
-        if (event.metaKey && !justPerformedLongPress) {
+        if (event.altKey && !justPerformedLongPress) {
             longPress(event)
             event.preventDefault()
         }
@@ -132,7 +132,7 @@ const longpressBootstrap = () => {
      */
     const longPress = (event) => {
         timeout = null
-        metaKey = true
+        altKey = true
         const htmlFor = getControlId(event.target)
         const element = htmlFor ? document.getElementById(htmlFor) : event.target
         if (!element) {
