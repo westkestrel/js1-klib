@@ -39,7 +39,7 @@ const isCollapsed = (elementOrClassString) => {
 
 const toggle = (event, solo) => {
     if (event.target.justHadLongPress) {
-        event.preventDefault
+        event.preventDefault()
         return true
     }
     
