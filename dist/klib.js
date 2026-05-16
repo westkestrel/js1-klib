@@ -23,7 +23,7 @@
 
 
 
-/** (version 0.4.0)
+/** (version 0.4.1)
  * Filterbox allows you to use checkboxes to show and hide rows of data.
  *
  * To use it, you ensure that your HTML has a controls block. Note that if you omit the
@@ -73,7 +73,7 @@
  * ***
  *
  * Filterbox pairs very nicely with checkbox-radio-group, which allow the user to
- * Command-click (or long-press) to toggle the visibility of all items *except* the one
+ * Option-click (or long-press) to toggle the visibility of all items *except* the one
  * they just selected, and with stored-checkbox-state, which preserves checkbox state
  * across page-loads using local storage.
  *
@@ -290,7 +290,7 @@ window.addEventListener('load', wireUpAllFilterControlContainers)
 filterboxBootstrap()
 
 
-/** (version 0.4.0)
+/** (version 0.4.1)
  * Generate a new **longpress** event when the user holds the mouse button (or their
  * finger on a touch-sensitive device) on a link, button, checkbox, or radio button.
  * On a Mac the user can also Option-click the element to generate this event, and on
@@ -508,7 +508,7 @@ const longpressBootstrap = () => {
 longpressBootstrap()
 
 
-/** (version 0.4.0)
+/** (version 0.4.1)
  * If you add `class="navigation-without-bookmarks"` to an HTML container (e.g., a `div`
  * or `section`) then any anchor links within that container (e.g., `<a href="#anchor">`)
  * will jump to that portion of the web page without adding the anchor to the end of the
@@ -550,7 +550,7 @@ window.addEventListener('load', wireUpNavigationLinks)
 navigationWithoutBookmarksBootstrap()
 
 
-/** (version 0.4.0)
+/** (version 0.4.1)
  * Radio Checkbox Groups allow you to have checkboxes which behave like radio buttons
  * when Option-clicked or long-pressed. This is *not* a standalone script; if you include
  * it you must first include *longpress.js*.
@@ -707,7 +707,7 @@ window.addEventListener('load', wireUpRadioGroups)
 radioCheckboxGroupsBootstrap()
 
 
-/** (version 0.4.0)
+/** (version 0.4.1)
  * Stored Checkbox State preserves checkbox state between webpage reloads.
  *
  * If you decorate a container with `class="stored-checkbox-state"` then any checkboxes
@@ -749,7 +749,7 @@ window.addEventListener('load', wireUpElements)
 storedCheckboxStateBootstrap()
 
 
-/** (version 0.4.0)
+/** (version 0.4.1)
  * Collapsible allows you to expand and collapse sections with the click of the mouse.
  *
  * To use it, you have a give a container (typically a DIV, SECTION, or TABLE) the class

@@ -19,22 +19,22 @@ After observing the behaviour of the page, view the page source to see the JavaS
 </p>
 <div class="supports-longpress">
 <p>
-Click, long-press, or Command-click (Control-click on Windows) this<br/>&nbsp;
+Click, long-press, or Option-click (Alt-click on Windows) this<br/>&nbsp;
 <a id="demo-link" href="#none">Link</a>
 </p>
 <p>
-Click, long-press, or Command-click (Control-click on Windows) this<br/>&nbsp;
+Click, long-press, or Option-click (Alt-click on Windows) this<br/>&nbsp;
 <button id="demo-button">Button</button>
 <button id="demo-bad-button-1">Bad Button</button>
 </p>
 <p>
-Check, uncheck, long-press, or Command-click this<br/>&nbsp;
+Check, uncheck, long-press, or Option-click this<br/>&nbsp;
 <input type="checkbox" id="demo-checkbox"/> <label for="demo-checkbox">Checkbox</label>
 </p>
 </div>
 
 <p>
-Click, long-press, or Command-click (Control-click on Windows) this<br/>&nbsp;
+Click, long-press, or Option-click (Alt-click on Windows) this<br/>&nbsp;
 <button id="demo-bad-button-2">Other Bad Button</button>
 <button id="demo-good-button" class="supports-longpress">Good Button</button>
 </p>
@@ -50,7 +50,7 @@ so your code must check if this is the click following a long-press by examining
 <code>event.target.justHadLongPress</code>. 
 </p>
 <p>
-Observe that if you Command-click on the <strong>Bad Button</strong> the code delivers a long-press event (correct) but then delivers a click event without setting the <code>justHadLongPress</code> flag (<strong>wrong!</strong>).
+Observe that if you Option-click on the <strong>Bad Button</strong> the code delivers a long-press event (correct) but then delivers a click event without setting the <code>justHadLongPress</code> flag (<strong>wrong!</strong>).
 This happened because the page code added its click handler before the <em>longpress.js</em> code registered its own handlers.
 You must register your event handlers within a handler of the <strong>window.load</strong> event, and must register your load-event handler <em>after</em> including the <em>longpress.js</em> code.
 </p>

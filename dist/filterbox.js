@@ -21,7 +21,7 @@
 * 
 */
 
-/** (version 0.4.0)
+/** (version 0.4.1)
  * Filterbox allows you to use checkboxes to show and hide rows of data.
  *
  * To use it, you ensure that your HTML has a controls block. Note that if you omit the
@@ -71,7 +71,7 @@
  * ***
  *
  * Filterbox pairs very nicely with checkbox-radio-group, which allow the user to
- * Command-click (or long-press) to toggle the visibility of all items *except* the one
+ * Option-click (or long-press) to toggle the visibility of all items *except* the one
  * they just selected, and with stored-checkbox-state, which preserves checkbox state
  * across page-loads using local storage.
  *
