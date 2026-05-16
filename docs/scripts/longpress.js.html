@@ -95,8 +95,8 @@ footer .line-above {
 <h1>longpress.js</h1>
 <p>Generate a new <strong>longpress</strong> event when the user holds the mouse button (or their
 finger on a touch-sensitive device) on a link, button, checkbox, or radio button.
-On a Mac the user can also Command-click the element to generate this event, and on
-Windows they can use Control-click.</p>
+On a Mac the user can also Option-click the element to generate this event, and on
+Windows they can use Alt-click.</p>
 <p>If you write any code that uses the new longpress event, you must register your event
 listeners in a window-load event handler, and you must register that handler <em>after</em>
 loading <em>longpress.js</em>. E.g.,</p>
@@ -122,7 +122,7 @@ window.addEventListener(&#39;load&#39;, () =&gt; {
 </code></pre>
 <p>If you register you handlers too early then the new <strong>justHadLongPress</strong> flag will not
 have been added to the event target, and your code will end up performing both your
-long-press and click operations if the user Command-clicks the element.</p>
+long-press and click operations if the user Option-clicks the element.</p>
 <p>If you intend to support longpress events on an iOS device you will probably want to
 prevent the system-standard Copy menu from coming up when the user long-presses. If
 you add the css class <code>supports-longpress</code> to a container then the Copy menu will be

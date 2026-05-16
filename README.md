@@ -44,7 +44,7 @@ e.g.,
 ```
 
 If you also include the *longpress.js* script then the user can long-press or
-Command-click (Control-click on Windows) a button to expand the section and collapse
+Option-click (Alt-click on Windows) a button to expand the section and collapse
 all others.  You must include the *longpress.js* script before *collapsible.js*.
 
 ### filterbox.js
@@ -99,7 +99,7 @@ the last checkbox both the "birds" and "bees" rows will be hidden, but not the
 ***
 
 Filterbox pairs very nicely with checkbox-radio-group, which allow the user to
-command-click (or long-press) to toggle the visibility of all items *except* the one
+Command-click (or long-press) to toggle the visibility of all items *except* the one
 they just selected, and with stored-checkbox-state, which preserves checkbox state
 across page-loads using local storage.
 
@@ -115,8 +115,8 @@ attached its event listeners) before those files attempt to work with them.
 
 Generate a new **longpress** event when the user holds the mouse button (or their
 finger on a touch-sensitive device) on a link, button, checkbox, or radio button.
-On a Mac the user can also Command-click the element to generate this event, and on
-Windows they can use Control-click.
+On a Mac the user can also Option-click the element to generate this event, and on
+Windows they can use Alt-click.
 
 If you write any code that uses the new longpress event, you must register your event
 listeners in a window-load event handler, and you must register that handler *after*
@@ -146,7 +146,7 @@ window.addEventListener('load', () => {
 
 If you register you handlers too early then the new **justHadLongPress** flag will not
 have been added to the event target, and your code will end up performing both your
-long-press and click operations if the user Command-clicks the element.
+long-press and click operations if the user Option-clicks the element.
 
 If you intend to support longpress events on an iOS device you will probably want to
 prevent the system-standard Copy menu from coming up when the user long-presses. If
@@ -166,12 +166,12 @@ URL.
 
 
 Radio Checkbox Groups allow you to have checkboxes which behave like radio buttons
-when Command-clicked or long-pressed. This is *not* a standalone script; if you include
+when Option-clicked or long-pressed. This is *not* a standalone script; if you include
 it you must first include *longpress.js*.
 
 To use it, add `class="radio-checkbox-group"` to a container.  Now any checkboxes
-within the container will behave normally when toggled, unless the Command key (on
-a Mac) or Control key (on Windows) is held, or if the checkbox is long-pressed on a
+within the container will behave normally when toggled, unless the Option key (on
+a Mac) or Alt key (on Windows) is held, or if the checkbox is long-pressed on a
 phone or tablet or long-clicked on computer.  Any of these gestures will trigger the
 radio-checkbox-group behavior.
 

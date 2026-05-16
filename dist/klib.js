@@ -23,7 +23,7 @@
 
 
 
-/** (version 0.3.3)
+/** (version 0.4.0)
  * Filterbox allows you to use checkboxes to show and hide rows of data.
  *
  * To use it, you ensure that your HTML has a controls block. Note that if you omit the
@@ -73,7 +73,7 @@
  * ***
  *
  * Filterbox pairs very nicely with checkbox-radio-group, which allow the user to
- * command-click (or long-press) to toggle the visibility of all items *except* the one
+ * Command-click (or long-press) to toggle the visibility of all items *except* the one
  * they just selected, and with stored-checkbox-state, which preserves checkbox state
  * across page-loads using local storage.
  *
@@ -290,11 +290,11 @@ window.addEventListener('load', wireUpAllFilterControlContainers)
 filterboxBootstrap()
 
 
-/** (version 0.3.3)
+/** (version 0.4.0)
  * Generate a new **longpress** event when the user holds the mouse button (or their
  * finger on a touch-sensitive device) on a link, button, checkbox, or radio button.
- * On a Mac the user can also Command-click the element to generate this event, and on
- * Windows they can use Control-click.
+ * On a Mac the user can also Option-click the element to generate this event, and on
+ * Windows they can use Alt-click.
  *
  * If you write any code that uses the new longpress event, you must register your event
  * listeners in a window-load event handler, and you must register that handler *after*
@@ -324,7 +324,7 @@ filterboxBootstrap()
  * 
  * If you register you handlers too early then the new **justHadLongPress** flag will not
  * have been added to the event target, and your code will end up performing both your
- * long-press and click operations if the user Command-clicks the element.
+ * long-press and click operations if the user Option-clicks the element.
  *
  * If you intend to support longpress events on an iOS device you will probably want to
  * prevent the system-standard Copy menu from coming up when the user long-presses. If
@@ -335,7 +335,7 @@ filterboxBootstrap()
  
 const longpressBootstrap = () => {
 
-    var metaKey = false
+    var altKey = false
     var justPerformedLongPress = false
     var timeout = null
 
@@ -364,7 +364,7 @@ const longpressBootstrap = () => {
     const hit = (event) => {
         justPerformedLongPress = false
         event.target.justHadLongPress = justPerformedLongPress
-        metaKey = event.metaKey
+        altKey = event.altKey
         if (timeout) clearTimeout(timeout)
         timeout = setTimeout(longPress, 1000, event)
         
@@ -383,14 +383,14 @@ const longpressBootstrap = () => {
             return true
         }
         
-        metaKey = event.metaKey
+        altKey = event.altKey
         if (timeout) {
             clearTimeout(timeout)
             timeout = null
         }
         
-        // command-clicking is the same as a long-press
-        if (event.metaKey && !justPerformedLongPress) {
+        // option-clicking is the same as a long-press
+        if (event.altKey && !justPerformedLongPress) {
             longPress(event)
             event.preventDefault()
         }
@@ -424,7 +424,7 @@ const longpressBootstrap = () => {
      */
     const longPress = (event) => {
         timeout = null
-        metaKey = true
+        altKey = true
         const htmlFor = getControlId(event.target)
         const element = htmlFor ? document.getElementById(htmlFor) : event.target
         if (!element) {
@@ -508,7 +508,7 @@ const longpressBootstrap = () => {
 longpressBootstrap()
 
 
-/** (version 0.3.3)
+/** (version 0.4.0)
  * If you add `class="navigation-without-bookmarks"` to an HTML container (e.g., a `div`
  * or `section`) then any anchor links within that container (e.g., `<a href="#anchor">`)
  * will jump to that portion of the web page without adding the anchor to the end of the
@@ -550,14 +550,14 @@ window.addEventListener('load', wireUpNavigationLinks)
 navigationWithoutBookmarksBootstrap()
 
 
-/** (version 0.3.3)
+/** (version 0.4.0)
  * Radio Checkbox Groups allow you to have checkboxes which behave like radio buttons
- * when Command-clicked or long-pressed. This is *not* a standalone script; if you include
+ * when Option-clicked or long-pressed. This is *not* a standalone script; if you include
  * it you must first include *longpress.js*.
  *
  * To use it, add `class="radio-checkbox-group"` to a container.  Now any checkboxes
- * within the container will behave normally when toggled, unless the Command key (on
- * a Mac) or Control key (on Windows) is held, or if the checkbox is long-pressed on a
+ * within the container will behave normally when toggled, unless the Option key (on
+ * a Mac) or Alt key (on Windows) is held, or if the checkbox is long-pressed on a
  * phone or tablet or long-clicked on computer.  Any of these gestures will trigger the
  * radio-checkbox-group behavior.
  *
@@ -576,7 +576,6 @@ navigationWithoutBookmarksBootstrap()
 const radioCheckboxGroupsBootstrap = () => {
 
 const wireUpCheckboxes = (checkboxes, labels) => {
-    var metaKey = false
     var justPerformedLongPress = false
     var timeout = null
     
@@ -649,7 +648,6 @@ const wireUpCheckboxes = (checkboxes, labels) => {
      */
     const longPress = event => {
         timeout = null
-        metaKey = true
         const htmlFor = getCheckboxId(event.target)
         const checkbox = htmlFor ? document.getElementById(htmlFor) : event.target
         if (!checkbox) {
@@ -709,7 +707,7 @@ window.addEventListener('load', wireUpRadioGroups)
 radioCheckboxGroupsBootstrap()
 
 
-/** (version 0.3.3)
+/** (version 0.4.0)
  * Stored Checkbox State preserves checkbox state between webpage reloads.
  *
  * If you decorate a container with `class="stored-checkbox-state"` then any checkboxes
@@ -751,7 +749,7 @@ window.addEventListener('load', wireUpElements)
 storedCheckboxStateBootstrap()
 
 
-/** (version 0.3.3)
+/** (version 0.4.0)
  * Collapsible allows you to expand and collapse sections with the click of the mouse.
  *
  * To use it, you have a give a container (typically a DIV, SECTION, or TABLE) the class
@@ -772,7 +770,7 @@ storedCheckboxStateBootstrap()
  * ```
  *
  * If you also include the *longpress.js* script then the user can long-press or
- * Command-click (Control-click on Windows) a button to expand the section and collapse
+ * Option-click (Alt-click on Windows) a button to expand the section and collapse
  * all others.  You must include the *longpress.js* script before *collapsible.js*.
  */
  
