@@ -1,5 +1,9 @@
 # Change Log
 
+### 0.3.3 (16-May-2026)
+
+Bugfix: In *longpress.js* and *collapsible.js* some code had read `event.preventDefault` rather than `event.preventDefault()`, which meant that the default click behavour was *not* actually getting prevented.
+
 ### 0.3.2 (13-May-2026)
 
 Add a **docs** folder and update the **build.js** script to populate it with with the contents of the README file, the doc comments at the top of each JavaScript and CSS file, and the demo pages.
