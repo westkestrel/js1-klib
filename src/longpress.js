@@ -100,7 +100,7 @@ const longpressBootstrap = () => {
         // command-clicking is the same as a long-press
         if (event.metaKey && !justPerformedLongPress) {
             longPress(event)
-            event.preventDefault
+            event.preventDefault()
         }
         
         return true
